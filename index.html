@@ -2,13 +2,13 @@
 <html>
   <head>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-KY5Z7DLG09"></script>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-HJ1X0QS648"></script>
 	<script>
 	  window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments);}
 	  gtag('js', new Date());
 
-	  gtag('config', 'G-KY5Z7DLG09');
+	  gtag('config', 'G-HJ1X0QS648');
 	</script>
     <title>オーロラクロック3制御アプリ</title>
     <link href="css/design.css" rel="stylesheet" type="text/css">
@@ -23,13 +23,13 @@
     <script src="js/myblock_Stub.js"></script>
     <script src="js/myblock_Definition.js"></script>
     <script src="js/workspace.js" defer></script>
-    <script src="js/webhid.js"></script>
     <script src="js/demo.js"></script>
     <script src="js/function.js"></script>
-    <script src="js/function_data_send.js"></script>
+    <script src="js/function_data_send_ipad.js"></script>
     <script src="js/function_edit.js"></script>
     <script src="js/function_file.js"></script>
     <script src="js/function_share.js"></script>
+    <script src="js/sendSound_o.js"></script>
   </head>
   <body style="padding-top: 70px">
     <!-- ワークスペースのエリア -->
@@ -58,35 +58,24 @@
 		<a class="printbtn" id="prtbtn2" href="#" onClick="printNoDisplay()">キャンセル</a>
 	</div>
 	</div>
-
+		
     <div class="row justify-content-center">
-		<div class="col-sm-3 img-center">
-			<div class="pro_status_tenso" id='tenso_status'>転送中</div>
-			<div class="pro_status_jikko" id='jikko_status'>実行中</div>
-		</div>
-		<div class="col-sm-6 img-center">
-		接続状態：<span style="color:blue" id="setuzokujotai">接続されていません</span>
-		</div>
-		<div class="col-sm-3">
-		</div>
+		<img class="img-center .img-responsive" src="img/sw1.png" alt=""/>を押しながら
+		<img class="img-center .img-responsive" src="img/sw2.png" alt=""/>にする
+		<img class="img-center .img-responsive" src="img/sw3.png" alt=""/>を離す
+		<img class="img-center .img-responsive" src="img/sw4.png" alt=""/>「接続処理」をする
     </div>
+	
     <div class="row justify-content-center">
-	  <div class="col" id="blocklyDiv" style="height: 500px; width: 100%;"></div>	
+	  <div class="col" id="blocklyDiv" style="height: 650px; width: 100%;"></div>	
 	  <div class="col-sm-4 backcolor-green">
-		  <div class="img-center"><img class="img-center.img-responsive" src="img/ud1.png" alt=""/></div>
-		  <div class="img-center">
-		    プログラミング手順(UD-1/2)
+		  <div class="img-center"><img class="img-center .img-responsive" src="img/ud1.png" alt=""/></div>
+		  <div class="img-center text-danger font-weight-bold">
+		    注意点
 		  </div>
 		  <div class="connectcheck font13">
-				  ①オーロラクロックをUSBで接続し電源をONにする<br>
-				  ②「接続処理」をクリックし、デバイス一覧から「UD-1/2」を選択し「接続」をクリック（<a href="help/connection_usb.pdf" target="_blank">詳しくはこちら</a>）<br>
-				  ③プログラムを作成する<br>
-				  ④「転送」をクリックしプログラムを転送する<br>
-				  ⑤「実行」をクリックし転送したプログラムを実行する
-		  </div>
-	      <div class="font13" style="border: 1px solid #ff0000;">
-		  【接続を確認する】<br>
-		  オーロラクロック本体の光センサを手で覆って画面の明るさのセンサ値が変動すれば接続されています
+			  <span class="font-weight-bold">１，プログラミングを行う前に「接続処理」を確認して下さい</span>（<a href="help/connection_ipad.pdf" target="_blank">接続処理の詳細はこちら</a>）<br><br>
+			  <span class="font-weight-bold">２，データ転送が出来なくなった場合はアプリを開きなおして下さい</span><br>iPadがスリープになったり、保存、読み込みを行った場合データ転送が出来なくなります。<br>その場合は<img class="img-center .img-responsive" src="img/kosin.png" alt=""/>をクリックしアプリを再読み込みした後、「接続処理」を押し、LEDが紫点灯することを確認し「転送・実行」を行って下さい
 		  </div>
 	  </div>
     </div>
@@ -96,8 +85,8 @@
 		<form name="form3"><textarea style="display:none;" name='textarea2' id='sendText'>転送データ</textarea></form>  
 		<form name="form4"><textarea style="display:none;" name='textarea3' id='shareText'>共通データ</textarea></form>
 		<form name="form5"><textarea style="display:none;" name='textarea4' id='xmlText'>XML</textarea></form>		
+		<form name="form6"><textarea style="display:none;" name='textarea5' id='arrayText'>ipad</textarea></form>	
     </div>
-		
     </div>
 
     <!-- 本体へ保存したファイルの読み込み画面 -->
@@ -138,9 +127,7 @@
     <block type="if_block_swon"></block>
     <block type="if_block_swoff"></block>
     <block type="if_block_light"></block>
-    <block type="if_block_dark"></block>
-    <block type="if_block_beforetime"></block>
-    <block type="if_block_aftertime"></block>
+    <block type="if_block_dark"></block> 
   </category>
   <category name="LED 点灯" colour="#00aaff">
     <block type="led_red">
@@ -271,13 +258,6 @@
 	      maxBlocks : Infinity,
 	      css : true, 
 	      sounds : false, 
-	   	  zoom : { 
-			wheel : true, 
-			startScale : 1, 
-			maxScale : 3, 
-			minScale : 0.3, 
-			scaleSpeed : 1.2
-		  }
       };
       var workspace = Blockly.inject('blocklyDiv', options);
       
@@ -286,32 +266,33 @@
 		document.getElementById("print-siyo").style.display ="none";
 		document.getElementById("print-kuhu").style.display ="none";
 		document.getElementById("print-kanso").style.display ="none";
-		document.getElementById("tenso_status").style.display ="none";
-		document.getElementById("jikko_status").style.display ="none";	
 		//自動保存したプログラムの呼び出し
   		autosavefile_read();
 		
 	    //ファイル読み込み用
-	    window.addEventListener('DOMContentLoaded', function(){
-        document.getElementById("readfile").addEventListener('change', function(){
-		  var fileinfo = document.getElementById("readfile").value.split('.');
-          var input = document.getElementById("readfile").files[0];
-          var reader = new FileReader();
-          reader.addEventListener('load', function(){
-			  if (fileinfo[1] == "ud1"){
-          		uploadCode(reader.result);				  
-			  }
-			  else{
-				var readdata = event.target.result.substring(event.target.result.indexOf("START"));	
-				sharelist_to_program(readdata);
-			  }
-			  //タイトルにファイル名表示
-			  document.title = document.getElementById("readfile").value;
-			  document.getElementById("readfile").value = "";
-          }, false);
-          reader.readAsText(input, 'UTF-8');
-        }, false);
-	    });
+		window.addEventListener('DOMContentLoaded', function(){
+	    var ele = document.getElementById("readfile");
+	    ele.addEventListener('change', function(ev){
+			var file = ev.target.files[0];
+			var filename = file.name.split('.');
+			var reader = new FileReader();
+			if (filename[1] == "ud1" || filename[1] == "ud1f" || filename[1] == "ud1w"){
+			  reader.readAsText(file, 'UTF-8');
+			}
+			reader.onload = function(e){
+				if (reader.result.substr(0,4) == "<xml" ){
+					uploadCode(reader.result);		
+				}
+				else{
+					var readdata = event.target.result.substring(event.target.result.indexOf("START"));	
+					sharelist_to_program(readdata);
+				}
+			    //タイトルにファイル名表示
+			    document.title = document.getElementById("readfile").value;
+				document.getElementById("readfile").value = "";
+			}
+	    }, false);
+		});
 		
 		//保存ファイルのドラッグドロップ処理
 		$(function() {
@@ -340,7 +321,7 @@
 				var file = event.originalEvent.dataTransfer.files[0];
 				if (strSplit(file.name,1,".") == "ud1f" || strSplit(file.name,1,".") == "ud1" || strSplit(file.name,1,".") == "ud1w"){
 					// ファイルの内容は FileReader で読み込みます.
-					var fileReader = new FileReader();
+					var fileReader = new FileReader();					
 					fileReader.onload = function(event) {
 					  // event.target.result に読み込んだファイルの内容が入っています.		
 						if (strSplit(file.name,1,".") == "ud1"){
@@ -370,37 +351,35 @@
       });
     </script>
 	  
-  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">オーロラクロック3　
-	  <span id="dispsensor_off">明るさ：--　外部センサ：--</span>
-	  <span id="dispsensor_on">明るさ：<span id="cdSData"></span>　外部センサ：<span id="gaibuData"></span></span>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">オーロラクロック3(iPad)
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent1">
     <ul class="navbar-nav mx-auto">
       <li class="nav-item dropdown">
 		  <a class="nav-link dropdown-toggle" href="#"  id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ファイル</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-			<a class="dropdown-item" onclick="saveCode()" href="#">ブラウザへ保存</a>
-			<a class="dropdown-item" onclick="restoreBlocks()" href="#">ブラウザから読み込み</a>
+			<a class="dropdown-item aback" ontouchstart="" onclick="saveCode()" href="#">ブラウザへ保存</a>
+			<a class="dropdown-item aback" ontouchstart="" onclick="restoreBlocks()" href="#">ブラウザから読み込み</a>
             <div class="dropdown-divider"></div>
-			<a class="dropdown-item" onclick="downloadCode()" href="#">ファイルへ保存</a>
-			<label class="dropdown-item read_label"><form name="test">ファイルから読み込み<input type="file" id="readfile" accept=".ud1f,.ud1,.ud1w" hidden></form></label>
+			<a class="dropdown-item aback" ontouchstart="" onclick="downloadCode_ipad()" href="#" id="filesave">ファイルへ保存</a>
+			<label class="dropdown-item read_label aback" ontouchstart=""><form name="test">ファイルから読み込み<input type="file" id="readfile" accept=".ud1f,.ud1,.ud1w" hidden></form></label>
 			<div class="dropdown-divider"></div>
-			<a class="dropdown-item" onclick="read_demo(1)" href="#">デモ1(順次)</a>
-			<a class="dropdown-item" onclick="read_demo(2)" href="#">デモ2(順次)</a>
-			<a class="dropdown-item" onclick="read_demo(3)" href="#">デモ3(反復)</a>
-			<a class="dropdown-item" onclick="read_demo(4)" href="#">デモ4(分岐)</a>
-			<a class="dropdown-item" onclick="read_demo(5)" href="#">初期プログラム</a>
+			<a class="dropdown-item aback" ontouchstart="" onclick="read_demo(1)" href="#">デモ1(順次)</a>
+			<a class="dropdown-item aback" ontouchstart="" onclick="read_demo(2)" href="#">デモ2(順次)</a>
+			<a class="dropdown-item aback" ontouchstart="" onclick="read_demo(3)" href="#">デモ3(反復)</a>
+			<a class="dropdown-item aback" ontouchstart="" onclick="read_demo(4)" href="#">デモ4(分岐)</a>
+			<a class="dropdown-item aback" ontouchstart="" onclick="read_demo(5)" href="#">初期プログラム</a>
           </div>
       </li>
-	  <li class="nav-item"> <a class="nav-link" href="#" onclick="connectHID()">接続処理　</a></li>
-      <li class="nav-item"> <a class="nav-link" href="#" onclick="sendHID()">　転送　　</a></li>
-      <li class="nav-item"> <a class="nav-link" href="#" onclick="runHID()">　実行　　</a></li>
+	  <li class="nav-item"> <a class="nav-link aback" ontouchstart="" href="#" onclick="connect_iPad()">接続処理　</a></li>
+      <li class="nav-item"> <a class="nav-link aback" ontouchstart="" href="#" onclick="sendHID_iPad()">　転送　　</a></li>
+      <li class="nav-item"> <a class="nav-link aback" ontouchstart="" href="#" onclick="runHID_iPad()">　実行　　</a></li>
 	  <li class="nav-item dropdown">
 		  <a class="nav-link dropdown-toggle" href="#"  id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">その他</a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-			<a class="dropdown-item" onclick="printDisplay()" href="#">レポート作成</a>
+			<a class="dropdown-item aback" ontouchstart="" onclick="printDisplay()" href="#">レポート作成</a>
 			<div class="dropdown-divider"></div>
-			<a class="dropdown-item" onclick="disp_memory()" href="#">消費メモリ表示</a>
+			<a class="dropdown-item aback" ontouchstart="" onclick="disp_memory()" href="#">消費メモリ表示</a>
 			<div class="dropdown-divider"></div>
 			<a class="dropdown-item" onclick="delete_restoreBlocks()" href="#">ブラウザへ保存したプログラムの削除</a>
           </div>
@@ -408,10 +387,10 @@
 	  <li class="nav-item dropdown">
 		  <a class="nav-link dropdown-toggle" href="#"  id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ヘルプ</a>
 		  <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-			<a class="dropdown-item" href="help/comm_kei_b.pdf" target="_blank">コマンド一覧</a>
+			<a class="dropdown-item aback" ontouchstart="" href="help/comm_kei_b.pdf" target="_blank">コマンド一覧</a>
 			<div class="dropdown-divider"></div>
-			<a class="dropdown-item" href="help/operation.pdf" target="_blank">ヘルプ</a>
-			<a class="dropdown-item" href="help/connection_usb.pdf" target="_blank">接続処理について</a>
+			<a class="dropdown-item aback" ontouchstart="" href="help/operationipad.pdf" target="_blank">ヘルプ</a>
+			<a class="dropdown-item aback" ontouchstart="" href="help/connection_ipad.pdf" target="_blank">接続処理について</a>
 		  </div>
 	  </li>
     </ul>
@@ -420,9 +399,6 @@
 <script src="js/jquery-3.4.1.min.js" type="text/javascript"></script>
 <script src="js/popper.min.js" type="text/javascript"></script>
 <script src="js/bootstrap-4.3.1.js" type="text/javascript"></script>
-<script>
-		document.getElementById("dispsensor_off").style.display ="none";	
-		document.getElementById("dispsensor_on").style.display ="block";
-</script>
+
   </body>
 </html>
