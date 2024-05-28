@@ -86,15 +86,15 @@ function connect_iPad(){
     sendDataArray.fill(0);
     //sendDataArray[0] = 253;
     //sendDataArray[1] = 5;
-    sendDataArray[0] = 10;
-    sendDataArray[1] = 11;
-    sendDataArray[2] = 12;
-    sendDataArray[3] = 13;
-    sendDataArray[4] = 14;
-    sendDataArray[5] = 15;
-    sendDataArray[6] = 16;
-    sendDataArray[7] = 17;
-    sendDataArray[8] = 18;
+    sendDataArray[0] = 255;
+    sendDataArray[1] = 255;
+    sendDataArray[2] = 255;
+    sendDataArray[3] = 255;
+    sendDataArray[4] = 255;
+    sendDataArray[5] = 255;
+    sendDataArray[6] = 6;
+    sendDataArray[7] = 7;
+    sendDataArray[8] = 8;
     sendDataBySound(sendDataArray);
 }
 
