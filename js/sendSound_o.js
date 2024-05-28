@@ -84,6 +84,8 @@ let sendDataArray = Array(19);
 **************************************/
 function connect_iPad(){
     sendDataArray.fill(0);
+    //sendDataArray[0] = 253;
+    //sendDataArray[1] = 5;
     sendDataArray[0] = 0;
     sendDataArray[1] = 1;
     sendDataArray[2] = 2;
