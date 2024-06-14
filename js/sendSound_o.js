@@ -120,7 +120,7 @@ function connect_iPad(){
     sendDataArray[2] = 2;
     sendDataArray[3] = 3;
 
-    sendDataArray[4] = 4;
+    sendDataArray[4] = 253;
     sendDataArray[5] = 5;
     sendDataArray[6] = 6;
     sendDataArray[7] = 7;
@@ -245,8 +245,8 @@ function sendLoop(){
 function soundRun() {
     sendDataArray.fill(0);
     //実行
-    sendDataArray[0] = 253;             //iPadモード
-    sendDataArray[1] = 2;               //実行
+    sendDataArray[4] = 253;             //iPadモード
+    sendDataArray[5] = 2;               //実行
                                         //以降の配列は、0が入っているので、そのままで良い
     sendDataBySound(sendDataArray);
     //console.log(sendDataArray);
