@@ -61,7 +61,8 @@ var myArrayBuffer = audioCtx.createBuffer(2,frameCount,audioCtx.sampleRate);
  * 
 **************************************/
 //送信用のデータの入った配列
-let sendDataArray = Array(19);
+//let sendDataArray = Array(19);
+let sendDataArray = Array(23);      //Bluetooth版のとき最初の4つ分が無視される
 
 /**************************************
  * データの転送方法
@@ -92,7 +93,7 @@ function connect_iPad(){
     sendDataArray[3] = 3;
     sendDataArray[4] = 253;
     sendDataArray[5] = 5;
-    /*sendDataArray[6] = 6;
+    sendDataArray[6] = 6;
     sendDataArray[7] = 7;
     sendDataArray[8] = 8;
     sendDataArray[9] = 9;
@@ -104,7 +105,12 @@ function connect_iPad(){
     sendDataArray[15] = 15;
     sendDataArray[16] = 16;
     sendDataArray[17] = 17;
-    sendDataArray[18] = 18; */
+    sendDataArray[18] = 18;
+    sendDataArray[19] = 19;
+    sendDataArray[20] = 20;
+    sendDataArray[21] = 21;
+    sendDataArray[22] = 22;
+    sendDataArray[23] = 23;
     sendDataBySound(sendDataArray);
 }
 
