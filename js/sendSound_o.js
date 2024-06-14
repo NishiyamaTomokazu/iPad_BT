@@ -140,6 +140,7 @@ function connect_iPad(){
     sendDataArray[21] = 21;
     sendDataArray[22] = 22;
     sendDataArray[23] = 23;
+    sendDataArray[24] = 24;
     sendDataBySound(sendDataArray);
 }
 
