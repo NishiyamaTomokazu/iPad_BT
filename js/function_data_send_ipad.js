@@ -44,6 +44,7 @@ function sendHID_iPad() {
 		// sendArray[2] = i + 1;
     //Bluetoothで接続する場合
         var sendArray = new Array(23);
+        //var sendArray = new Array();
         sendArray.fill(0);      //0で初期化
         sendArray[0] = 0;
         sendArray[1] = 0;
