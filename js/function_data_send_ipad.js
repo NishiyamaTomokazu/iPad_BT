@@ -149,11 +149,11 @@ function runHID_iPad(){
     sendArray[3] = 3;
     sendArray[4] = 253;
     sendArray[5] = 2;
-    sendArray[6] = 6;
-    sendArray[7] = 7;
-    sendArray[8] = 8;
+    sendArray[6] = 9;
+    sendArray[7] = 9;
+    sendArray[8] = 9;
     sendArray[9] = 9;
-    sendArray[10] = 10;
+    sendArray[10] = 9;
 
 
     
