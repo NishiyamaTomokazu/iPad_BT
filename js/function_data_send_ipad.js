@@ -136,12 +136,25 @@ function sendHID_iPad() {
 function runHID_iPad(){
 	var sendArray = new Array(23);   
 	sendArray.fill(0);
-	sendArray[0] = 0;
-    sendArray[1] = 0;
-    sendArray[2] = 0;
-    sendArray[3] = 0;
-    sendArray[4] = 253;
-    sendArray[5] = 2;       //1:転送 2:実行
+	// sendArray[0] = 0;
+    // sendArray[1] = 0;
+    // sendArray[2] = 0;
+    // sendArray[3] = 0;
+    // sendArray[4] = 253;
+    // sendArray[5] = 2;       //1:転送 2:実行
+
+    sendArray[0] = 0;
+    sendArray[1] = 1;
+    sendArray[2] = 2;
+    sendArray[3] = 3;
+    sendArray[4] = 4;
+    sendArray[5] = 5;
+    sendArray[6] = 6;
+    sendArray[7] = 7;
+    sendArray[8] = 8;
+    sendArray[9] = 9;
+    sendArray[10] = 10;
+
 
     
 	sendDataBySound(sendArray);
