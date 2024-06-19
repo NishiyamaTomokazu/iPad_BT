@@ -124,8 +124,8 @@ function connect_iPad(){
     sendDataArray[4] = 253; //
     sendDataArray[5] = 5;
 */
-    sendDataArray[0] = 0;
-    sendDataArray[1] = 1;
+    sendDataArray[0] = 253;
+    sendDataArray[1] = 5;
     sendDataArray[2] = 2;
     sendDataArray[3] = 3;
     sendDataArray[4] = 4;
@@ -149,7 +149,7 @@ function connect_iPad(){
     // sendDataArray[22] = 22;
     sendDataBySound(sendDataArray);
 }
-
+/*
 //テスト用
 function soundRed(){
     sendDataArray.fill(0);      //0で初期化
@@ -236,7 +236,7 @@ function sendLoop(){
     sendDataArray[25] = 231;
     sendDataBySound(sendDataArray);
 }
-
+*/
 //有線版の場合
 // function soundRun() {
 //     sendDataArray.fill(0);
