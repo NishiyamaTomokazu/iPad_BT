@@ -96,29 +96,21 @@ function sendHID_iPad() {
 	document.form6.textarea5.value ="";
     var blcnt = Math.ceil(lines.length / 16);//32バイトずつ転送するので何ブロックあるか
     for  (var i = 0; i < blcnt; i++) {
-		// var sendArray = new Array(19);   //有線の場合の設定
-    	// sendArray.fill(0);
-		// sendArray[0] = 253;
-		// sendArray[1] = 1;// 1:転送 2:実行
-		// sendArray[2] = i + 1;
+		var sendArray = new Array(19);   //有線の場合の設定
+    	sendArray.fill(0);
+		sendArray[0] = 253;
+		sendArray[1] = 1;// 1:転送 2:実行
+		sendArray[2] = i + 1;
     //Bluetoothで接続する場合
-        var sendArray = new Array(23);
-        //var sendArray = new Array();
-        sendArray.fill(0);      //0で初期化
-        // sendArray[0] = 0;
-        // sendArray[1] = 0;
+        // var sendArray = new Array(23);
+        // sendArray.fill(0);      //0で初期化
+        // sendArray[0] = 0;   //ダミーデータ
+        // sendArray[1] = 0;   //今のICでは最初のデータが送られない
         // sendArray[2] = 0;
-        // sendArray[3] = 0;
+        // sendArray[3] = 0;   //ここまで
         // sendArray[4] = 253;
         // sendArray[5] = 1;   //1:転送　2:実行
         // sendArray[6] = i + 1;   //これ以降に実際のデータを送信する
-        sendArray[0] = 0;
-        sendArray[1] = 1;
-        sendArray[2] = 2;
-        sendArray[3] = 3;
-        sendArray[4] = 253;
-        sendArray[5] = 1;   //1:転送　2:実行
-        sendArray[6] = i + 1;   //これ以降に実際のデータを送信する
 		for (var j = 0; j < 16; j++) {
 			if ((i * 16 + j) > lines.length -1){break;}
         	sendArray[j + 7] = Number(lines[i * 16 + j]);			
@@ -136,22 +128,21 @@ function sendHID_iPad() {
 function runHID_iPad(){
 	var sendArray = new Array(23);   
 	sendArray.fill(0);
-	// sendArray[0] = 0;
+
+    //SRのBluetoothチップ
+    sendArray[0] = 253;   //ダミーデータ
+    sendArray[1] = 2;
+    // sendArray[2] = 0;
+    // sendArray[3] = 0;   //ダミーデータ
+    // sendArray[4] = 0;
+    // sendArray[5] = 0;
+
+    // sendArray[0] = 0;   //ダミーデータ
     // sendArray[1] = 0;
     // sendArray[2] = 0;
-    // sendArray[3] = 0;
+    // sendArray[3] = 0;   //ダミーデータ
     // sendArray[4] = 253;
-    // sendArray[5] = 2;       //1:転送 2:実行
+    // sendArray[5] = 2;
 
-    sendArray[0] = 0;
-    sendArray[1] = 1;
-    sendArray[2] = 2;
-    sendArray[3] = 3;
-    sendArray[4] = 253;
-    sendArray[5] = 2;
-
-
-
-    
 	sendDataBySound(sendArray);
 }
