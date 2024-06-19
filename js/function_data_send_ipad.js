@@ -96,48 +96,26 @@ function sendHID_iPad() {
 	document.form6.textarea5.value ="";
     var blcnt = Math.ceil(lines.length / 16);//32バイトずつ転送するので何ブロックあるか
     for  (var i = 0; i < blcnt; i++) {
-		var sendArray = new Array(19);   //有線の場合の設定
+		// var sendArray = new Array(19);   //有線の場合の設定
     	sendArray.fill(0);
-        sendDataArray[0] = 253;
-        sendDataArray[1] = 1;
-        sendDataArray[2] = i +1;
-        sendDataArray[3] = 3;
-        sendDataArray[4] = 4;
-        sendDataArray[5] = 5;
-        sendDataArray[6] = 6;
-        sendDataArray[7] = 7;
-        sendDataArray[8] = 8;
-        sendDataArray[9] = 9;
-        sendDataArray[10] = 10;
-        sendDataArray[11] = 11;
-        sendDataArray[12] = 12;
-        sendDataArray[13] = 13;
-        sendDataArray[14] = 14;
-        sendDataArray[15] = 15;
-        sendDataArray[16] = 16;
-        sendDataArray[17] = 17;
-        sendDataArray[18] = 18;
-    // sendDataArray[19] = 19;
-    // sendDataArray[20] = 20;
-    // sendDataArray[21] = 21;
-    // sendDataArray[22] = 22;
+ 
 		// sendArray[0] = 253;
 		// sendArray[1] = 1;// 1:転送 2:実行
 		// sendArray[2] = i + 1;
     //WLでBluetoothで接続する場合　最初の４つのデータが無視される
-        // var sendArray = new Array(23);
-        // sendArray.fill(0);      //0で初期化
-        // sendArray[0] = 0;   //ダミーデータ
-        // sendArray[1] = 0;   //今のICでは最初のデータが送られない
-        // sendArray[2] = 0;
-        // sendArray[3] = 0;   //ここまで
-        // sendArray[4] = 253;
-        // sendArray[5] = 1;   //1:転送　2:実行
-        // sendArray[6] = i + 1;   //これ以降に実際のデータを送信する
+        var sendArray = new Array(23);
+        sendArray.fill(0);      //0で初期化
+        sendArray[0] = 0;   //ダミーデータ
+        sendArray[1] = 0;   //今のICでは最初のデータが送られない
+        sendArray[2] = 0;
+        sendArray[3] = 0;   //ここまで
+        sendArray[4] = 253;
+        sendArray[5] = 1;   //1:転送　2:実行
+        sendArray[6] = i + 1;   //これ以降に実際のデータを送信する
 		for (var j = 0; j < 16; j++) {
 			if ((i * 16 + j) > lines.length -1){break;}
-        	//sendArray[j + 7] = Number(lines[i * 16 + j]);			
-            sendArray[j + 3] = Number(lines[i * 16 + j]);			
+        	sendArray[j + 7] = Number(lines[i * 16 + j]);			
+            //sendArray[j + 3] = Number(lines[i * 16 + j]);			
 		}
 		sendDataBySound(sendArray);  				
     	sleep(500);   		  
@@ -153,31 +131,9 @@ function runHID_iPad(){
 	//var sendArray = new Array(23);   //WLのBluetooth
     var sendArray = new Array(19);      //SRのBluetooth
 	sendArray.fill(0);
+    sendArray[0] = 253;
+    sendArray[1] = 2;   //2:実行
 
-    //SRのBluetoothチップ
-    sendDataArray[0] = 0;
-    sendDataArray[1] = 1;
-    sendDataArray[2] = 2;
-    sendDataArray[3] = 3;
-    sendDataArray[4] = 4;
-    sendDataArray[5] = 5;
-    sendDataArray[6] = 6;
-    sendDataArray[7] = 7;
-    sendDataArray[8] = 8;
-    sendDataArray[9] = 9;
-    sendDataArray[10] = 10;
-    sendDataArray[11] = 11;
-    sendDataArray[12] = 12;
-    sendDataArray[13] = 13;
-    sendDataArray[14] = 14;
-    sendDataArray[15] = 15;
-    sendDataArray[16] = 16;
-    sendDataArray[17] = 17;
-    sendDataArray[18] = 18;
-    // sendDataArray[19] = 19;
-    // sendDataArray[20] = 20;
-    // sendDataArray[21] = 21;
-    // sendDataArray[22] = 22;
 
 	sendDataBySound(sendArray);
 }
