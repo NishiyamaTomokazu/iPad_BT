@@ -61,7 +61,7 @@ var myArrayBuffer = audioCtx.createBuffer(2,frameCount,audioCtx.sampleRate);
  * 
 **************************************/
 //送信用のデータの入った配列
-let sendDataArray = Array(23);
+let sendDataArray = Array(19);
 //let sendDataArray = Array(24);      //Bluetooth版のとき最初の4つ分が無視される
 
 /**************************************
