@@ -98,10 +98,33 @@ function sendHID_iPad() {
     for  (var i = 0; i < blcnt; i++) {
 		var sendArray = new Array(19);   //有線の場合の設定
     	sendArray.fill(0);
-		sendArray[0] = 253;
-		sendArray[1] = 1;// 1:転送 2:実行
-		sendArray[2] = i + 1;
-    //Bluetoothで接続する場合
+        sendDataArray[0] = 0;
+    sendDataArray[1] = 1;
+    sendDataArray[2] = 2;
+    sendDataArray[3] = 3;
+    sendDataArray[4] = 4;
+    sendDataArray[5] = 5;
+    sendDataArray[6] = 6;
+    sendDataArray[7] = 7;
+    sendDataArray[8] = 8;
+    sendDataArray[9] = 9;
+    sendDataArray[10] = 10;
+    sendDataArray[11] = 11;
+    sendDataArray[12] = 12;
+    sendDataArray[13] = 13;
+    sendDataArray[14] = 14;
+    sendDataArray[15] = 15;
+    sendDataArray[16] = 16;
+    sendDataArray[17] = 17;
+    sendDataArray[18] = 18;
+    // sendDataArray[19] = 19;
+    // sendDataArray[20] = 20;
+    // sendDataArray[21] = 21;
+    // sendDataArray[22] = 22;
+		// sendArray[0] = 253;
+		// sendArray[1] = 1;// 1:転送 2:実行
+		// sendArray[2] = i + 1;
+    //WLでBluetoothで接続する場合　最初の４つのデータが無視される
         // var sendArray = new Array(23);
         // sendArray.fill(0);      //0で初期化
         // sendArray[0] = 0;   //ダミーデータ
@@ -131,19 +154,29 @@ function runHID_iPad(){
 	sendArray.fill(0);
 
     //SRのBluetoothチップ
-    sendArray[0] = 253;   //ダミーデータ
-    sendArray[1] = 2;
-    // sendArray[2] = 0;
-    // sendArray[3] = 0;   //ダミーデータ
-    // sendArray[4] = 0;
-    // sendArray[5] = 0;
-
-    // sendArray[0] = 0;   //ダミーデータ
-    // sendArray[1] = 0;
-    // sendArray[2] = 0;
-    // sendArray[3] = 0;   //ダミーデータ
-    // sendArray[4] = 253;
-    // sendArray[5] = 2;
+    sendDataArray[0] = 0;
+    sendDataArray[1] = 1;
+    sendDataArray[2] = 2;
+    sendDataArray[3] = 3;
+    sendDataArray[4] = 4;
+    sendDataArray[5] = 5;
+    sendDataArray[6] = 6;
+    sendDataArray[7] = 7;
+    sendDataArray[8] = 8;
+    sendDataArray[9] = 9;
+    sendDataArray[10] = 10;
+    sendDataArray[11] = 11;
+    sendDataArray[12] = 12;
+    sendDataArray[13] = 13;
+    sendDataArray[14] = 14;
+    sendDataArray[15] = 15;
+    sendDataArray[16] = 16;
+    sendDataArray[17] = 17;
+    sendDataArray[18] = 18;
+    // sendDataArray[19] = 19;
+    // sendDataArray[20] = 20;
+    // sendDataArray[21] = 21;
+    // sendDataArray[22] = 22;
 
 	sendDataBySound(sendArray);
 }

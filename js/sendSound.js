@@ -84,20 +84,34 @@ let sendDataArray = Array(19);
 **************************************/
 function connect_iPad(){
     sendDataArray.fill(0);
-    //デフォルト
-    /*sendDataArray[0] = 253;
-    sendDataArray[1] = 5;*/
-    sendDataArray[0] = 10;
-    sendDataArray[1] = 11;
-    sendDataArray[2] = 12;
-    sendDataArray[3] = 13;
-    sendDataArray[4] = 14;
-    sendDataArray[5] = 15;
-    sendDataArray[6] = 16;
-    sendDataArray[7] = 17;
-    sendDataArray[8] = 18;
-    sendDataArray[9] = 19;
-    sendDataArray[10] = 20;
+    /*  //WLのICを使った場合はうまくいく    
+        sendDataArray[0] = 0;   //ダミーデータ
+        sendDataArray[1] = 0;
+        sendDataArray[2] = 0;
+        sendDataArray[3] = 0;   //ここまで
+    
+        sendDataArray[4] = 253; //
+        sendDataArray[5] = 5;
+    */
+        sendDataArray[0] = 0;
+        sendDataArray[1] = 1;
+        sendDataArray[2] = 2;
+        sendDataArray[3] = 3;
+        sendDataArray[4] = 4;
+        sendDataArray[5] = 5;
+        sendDataArray[6] = 6;
+        sendDataArray[7] = 7;
+        sendDataArray[8] = 8;
+        sendDataArray[9] = 9;
+        sendDataArray[10] = 10;
+        sendDataArray[11] = 11;
+        sendDataArray[12] = 12;
+        sendDataArray[13] = 13;
+        sendDataArray[14] = 14;
+        sendDataArray[15] = 15;
+        sendDataArray[16] = 16;
+        sendDataArray[17] = 17;
+        sendDataArray[18] = 18;
     sendDataBySound(sendDataArray);
 }
 
