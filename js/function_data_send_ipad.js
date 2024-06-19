@@ -131,8 +131,13 @@ function runHID_iPad(){
 	//var sendArray = new Array(23);   //WLのBluetooth
     var sendArray = new Array(19);      //SRのBluetooth
 	sendArray.fill(0);
-    sendArray[0] = 253;
-    sendArray[1] = 2;   //2:実行
+
+    sendArray[0] = 0;   //ダミーデータ
+    sendArray[1] = 0;
+    sendArray[2] = 0;
+    sendArray[3] = 0;   //ここまで
+    sendArray[4] = 253;
+    sendArray[5] = 2;   //2:実行
 
 
 	sendDataBySound(sendArray);
