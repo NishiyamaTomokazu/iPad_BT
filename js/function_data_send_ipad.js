@@ -98,25 +98,25 @@ function sendHID_iPad() {
     for  (var i = 0; i < blcnt; i++) {
 		var sendArray = new Array(19);   //有線の場合の設定
     	sendArray.fill(0);
-        sendDataArray[0] = 0;
-    sendDataArray[1] = 1;
-    sendDataArray[2] = 2;
-    sendDataArray[3] = 3;
-    sendDataArray[4] = 4;
-    sendDataArray[5] = 5;
-    sendDataArray[6] = 6;
-    sendDataArray[7] = 7;
-    sendDataArray[8] = 8;
-    sendDataArray[9] = 9;
-    sendDataArray[10] = 10;
-    sendDataArray[11] = 11;
-    sendDataArray[12] = 12;
-    sendDataArray[13] = 13;
-    sendDataArray[14] = 14;
-    sendDataArray[15] = 15;
-    sendDataArray[16] = 16;
-    sendDataArray[17] = 17;
-    sendDataArray[18] = 18;
+        sendDataArray[0] = 253;
+        sendDataArray[1] = 1;
+        sendDataArray[2] = i +1;
+        sendDataArray[3] = 3;
+        sendDataArray[4] = 4;
+        sendDataArray[5] = 5;
+        sendDataArray[6] = 6;
+        sendDataArray[7] = 7;
+        sendDataArray[8] = 8;
+        sendDataArray[9] = 9;
+        sendDataArray[10] = 10;
+        sendDataArray[11] = 11;
+        sendDataArray[12] = 12;
+        sendDataArray[13] = 13;
+        sendDataArray[14] = 14;
+        sendDataArray[15] = 15;
+        sendDataArray[16] = 16;
+        sendDataArray[17] = 17;
+        sendDataArray[18] = 18;
     // sendDataArray[19] = 19;
     // sendDataArray[20] = 20;
     // sendDataArray[21] = 21;
@@ -136,7 +136,8 @@ function sendHID_iPad() {
         // sendArray[6] = i + 1;   //これ以降に実際のデータを送信する
 		for (var j = 0; j < 16; j++) {
 			if ((i * 16 + j) > lines.length -1){break;}
-        	sendArray[j + 7] = Number(lines[i * 16 + j]);			
+        	//sendArray[j + 7] = Number(lines[i * 16 + j]);			
+            sendArray[j + 3] = Number(lines[i * 16 + j]);			
 		}
 		sendDataBySound(sendArray);  				
     	sleep(500);   		  
