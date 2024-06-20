@@ -97,7 +97,7 @@ function sendHID_iPad() {
     var blcnt = Math.ceil(lines.length / 16);//32バイトずつ転送するので何ブロックあるか
     for  (var i = 0; i < blcnt; i++) {
 		// var sendArray = new Array(19);   //有線の場合の設定
-        var sendArray = new Array(23);   //Bluetoothの場合の設定
+        var sendArray = new Array(24);   //Bluetoothの場合の設定
     	sendArray.fill(0);
  
 		// sendArray[0] = 253;
@@ -132,7 +132,7 @@ function sendHID_iPad() {
 //実行処理(iPad)
 function runHID_iPad(){
 	//var sendArray = new Array(23);   //WLのBluetooth
-    var sendArray = new Array(19);      //SRのBluetooth
+    var sendArray = new Array(24);      //SRのBluetooth
 	sendArray.fill(0);
 
     sendArray[0] = 0;   //ダミーデータ
