@@ -11,17 +11,18 @@
 	  gtag('config', 'G-HJ1X0QS648');
 
     <!-- スリープから復帰したので接続処理を何回か押して貰う -->
+    <!--
     document.addEventListener('visibilitychange', function() {
       if (document.visibilityState === 'visible') {
           console.log('スリープから復帰しました');
           alert("接続処理を何度か押して、紫の点灯を確認してからプログラムを行ってください。");
           window.location.reload();
       }
-    });
+    });-->
 
     window.addEventListener('focus', function() {
       console.log('スリープから復帰しました');
-      alert("フォーカス再取得");
+      //alert("フォーカス再取得");
       window.location.reload();
     });
 
@@ -368,7 +369,7 @@
       });
     </script>
 	  
-  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">222オーロラクロック3(iPad)
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">333オーロラクロック3(iPad)
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent1">
     <ul class="navbar-nav mx-auto">
