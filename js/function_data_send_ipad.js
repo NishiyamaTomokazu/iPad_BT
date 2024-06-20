@@ -109,13 +109,15 @@ function sendHID_iPad() {
         sendArray[0] = 0;   //ダミーデータ
         sendArray[1] = 0;   //今のICでは最初のデータが送られない
         sendArray[2] = 0;
-        sendArray[3] = 0;   //ここまで
-        sendArray[4] = 253;
-        sendArray[5] = 1;   //1:転送　2:実行
-        sendArray[6] = i + 1;   //これ以降に実際のデータを送信する
+        sendArray[3] = 0;
+        sendArray[4] = 0;   //ここまで
+        sendArray[5] = 253;
+        sendArray[6] = 1;   //1:転送　2:実行
+        sendArray[7] = i + 1;   //これ以降に実際のデータを送信する
 		for (var j = 0; j < 16; j++) {
 			if ((i * 16 + j) > lines.length -1){break;}
-        	sendArray[j + 7] = Number(lines[i * 16 + j]);			
+            sendArray[j + 8] = Number(lines[i * 16 + j]);			//WLのBluetoothの場合
+        	//sendArray[j + 7] = Number(lines[i * 16 + j]);			
             //sendArray[j + 3] = Number(lines[i * 16 + j]);			
 		}
 		sendDataBySound(sendArray);  				
@@ -136,9 +138,10 @@ function runHID_iPad(){
     sendArray[0] = 0;   //ダミーデータ
     sendArray[1] = 0;
     sendArray[2] = 0;
-    sendArray[3] = 0;   //ここまで
-    sendArray[4] = 253;
-    sendArray[5] = 2;   //2:実行
+    sendArray[3] = 0;
+    sendArray[4] = 0;   //ここまで
+    sendArray[5] = 253;
+    sendArray[6] = 2;   //2:実行
 
 
 	sendDataBySound(sendArray);
