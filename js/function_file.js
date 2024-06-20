@@ -181,6 +181,7 @@ function downloadCode_ipad() {
 	const a = document.getElementById("filesave");
 	a.href = URL.createObjectURL(new Blob([text], {type: 'application/octet-stream'}));
 	a.download = result + ".ud1";
+	window.location.reload();
 }
 
 //レポート内容があれば代入
