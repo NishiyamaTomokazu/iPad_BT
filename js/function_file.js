@@ -4,6 +4,7 @@ function autosave(){
 	var text = Blockly.Xml.domToText(xml);
 	text = text + "\n" + report_txt();
 	localStorage.setItem("ud1_mainpro",  text);
+	console.log("オートセーブ！")
 }
 function autosavefile_read(){
 	var ABC = localStorage.getItem( "ud1_mainpro" ); // なかったらnullが返る
