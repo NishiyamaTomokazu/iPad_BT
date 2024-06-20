@@ -97,13 +97,14 @@ function sendHID_iPad() {
     var blcnt = Math.ceil(lines.length / 16);//32バイトずつ転送するので何ブロックあるか
     for  (var i = 0; i < blcnt; i++) {
 		// var sendArray = new Array(19);   //有線の場合の設定
+        var sendArray = new Array(23);   //Bluetoothの場合の設定
     	sendArray.fill(0);
  
 		// sendArray[0] = 253;
 		// sendArray[1] = 1;// 1:転送 2:実行
 		// sendArray[2] = i + 1;
     //WLでBluetoothで接続する場合　最初の４つのデータが無視される
-        var sendArray = new Array(23);
+        //var sendArray = new Array(23);
         sendArray.fill(0);      //0で初期化
         sendArray[0] = 0;   //ダミーデータ
         sendArray[1] = 0;   //今のICでは最初のデータが送られない
