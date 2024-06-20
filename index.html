@@ -12,11 +12,12 @@
 
     <!-- スリープから復帰したので接続処理を何回か押して貰う -->
     document.addEventListener('visibilitychange', function() {
-      if(document.visibilityState ==== 'visible') {
-        console.log('スリープから復帰');
-        alert("接続処理を何度か押して、紫が点くのを確認してください。");
-      }
-    });
+    if (document.visibilityState === 'visible') {
+        console.log('スリープから復帰しました');
+        alert("アラート");
+    }
+});
+
 	</script>
     <title>オーロラクロック3制御アプリ</title>
     <link href="css/design.css" rel="stylesheet" type="text/css">
