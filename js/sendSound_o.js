@@ -330,36 +330,36 @@ function outputSoundData(binaryDataArray) {
                  tmp = 20;
                  //tmp = 40;
                 while(i++ < tmp){
-                    newArray[i] = 0;      //iPadイヤホンジャック出力の場合
-                    //newArray[i] = 1;        //Bluetooth出力の場合
+                    //newArray[i] = 0;      //iPadイヤホンジャック出力の場合
+                    newArray[i] = 1;        //Bluetooth出力の場合
                 }
                 tmp = i + 30;
                 while(i++ < tmp){
-                    newArray[i] = 1;
-                    //newArray[i] = 0;
+                    //newArray[i] = 1;
+                    newArray[i] = 0;
                 }
             }
             if(x == 0){
                 tmp = i + 5;
                 while(i++ < tmp){
-                    newArray[i] = 0;
-                    //newArray[i] = 1;
+                    //newArray[i] = 0;
+                    newArray[i] = 1;
                 }
                 tmp = i + 5;
                 while(i++ < tmp){
-                    newArray[i] = 1;
-                    //newArray[i] = 0;
+                    //newArray[i] = 1;
+                    newArray[i] = 0;
                  }
             } else {
                 tmp = i + 5;
                 while(i++ < tmp){
-                    newArray[i] = 0;
-                    //newArray[i] = 1;
+                    //newArray[i] = 0;
+                    newArray[i] = 1;
                 }
                 tmp = i + 15;
                 while(i++ < tmp){
-                    newArray[i] = 1;
-                    //newArray[i] = 0;
+                    //newArray[i] = 1;
+                    newArray[i] = 0;
                 }
             }
             counter++;
@@ -367,8 +367,8 @@ function outputSoundData(binaryDataArray) {
             if((counter % 8) == 0) {
                 tmp = i+20;
                while(i++ < tmp){
-                   newArray[i] = 0;
-                   //newArray[i] = 1;
+                   //newArray[i] = 0;
+                   newArray[i] = 1;
                }
             }
         })
