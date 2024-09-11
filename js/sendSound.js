@@ -93,10 +93,10 @@ function connect_iPad(){
         sendDataArray[4] = 253; //
         sendDataArray[5] = 5;
     */
-        sendDataArray[0] = 0;
-        sendDataArray[1] = 1;
-        sendDataArray[2] = 2;
-        sendDataArray[3] = 3;
+        sendDataArray[0] = 255;
+        sendDataArray[1] = 255;
+        sendDataArray[2] = 255;
+        sendDataArray[3] = 255;
         sendDataArray[4] = 4;
         sendDataArray[5] = 5;
         sendDataArray[6] = 6;
