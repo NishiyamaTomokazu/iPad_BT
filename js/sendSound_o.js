@@ -117,11 +117,11 @@ function connect_iPad(){
     let sendDataArray = Array(24);      //Bluetooth版のとき最初の4つ分が無視される
     sendDataArray.fill(0);
   //WLのICを使った場合はうまくいく    
-    sendDataArray[0] = 0;   //ダミーデータ
-    sendDataArray[1] = 0;
-    sendDataArray[2] = 0;
-    sendDataArray[3] = 0;   //ここまで
-    sendDataArray[4] = 0;
+    sendDataArray[0] = 253;   //ダミーデータ
+    sendDataArray[1] = 1;
+    sendDataArray[2] = 2;
+    sendDataArray[3] = 3;   //ここまで
+    sendDataArray[4] = 4;
     sendDataArray[5] = 253;
     sendDataArray[6] = 5;
 
