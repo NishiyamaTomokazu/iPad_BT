@@ -117,37 +117,39 @@ function connect_iPad(){
     let sendDataArray = Array(24);      //Bluetooth版のとき最初の4つ分が無視される
     sendDataArray.fill(0);
   //WLのICを使った場合はうまくいく    
-    sendDataArray[0] = 253;   //ダミーデータ
+/*     sendDataArray[0] = 253;   //ダミーデータ
     sendDataArray[1] = 1;
     sendDataArray[2] = 2;
     sendDataArray[3] = 3;   //ここまで
     sendDataArray[4] = 4;
     sendDataArray[5] = 253;
-    sendDataArray[6] = 5;
+    sendDataArray[6] = 5; */
 
-    // sendDataArray[0] = 0;
-    // sendDataArray[1] = 1;
-    // sendDataArray[2] = 2;
-    // sendDataArray[3] = 3;
-    // sendDataArray[4] = 4;
-    // sendDataArray[5] = 5;
-    // sendDataArray[6] = 6;
-    // sendDataArray[7] = 7;
-    // sendDataArray[8] = 8;
-    // sendDataArray[9] = 9;
-    // sendDataArray[10] = 10;
-    // sendDataArray[11] = 11;
-    // sendDataArray[12] = 12;
-    // sendDataArray[13] = 13;
-    // sendDataArray[14] = 14;
-    // sendDataArray[15] = 15;
-    // sendDataArray[16] = 16;
-    // sendDataArray[17] = 17;
-    // sendDataArray[18] = 18;
-    // sendDataArray[19] = 19;
-    // sendDataArray[20] = 20;
-    // sendDataArray[21] = 21;
-    // sendDataArray[22] = 22;
+     sendDataArray[0] = 0;
+     sendDataArray[1] = 1;
+     sendDataArray[2] = 2;
+     sendDataArray[3] = 3;
+     sendDataArray[4] = 4;
+     sendDataArray[5] = 5;
+     sendDataArray[6] = 6;
+     sendDataArray[7] = 7;
+     sendDataArray[8] = 8;
+     sendDataArray[9] = 9;
+     sendDataArray[10] = 10;
+     sendDataArray[11] = 11;
+     sendDataArray[12] = 12;
+     sendDataArray[13] = 13;
+     sendDataArray[14] = 14;
+     sendDataArray[15] = 15;
+     sendDataArray[16] = 16;
+     sendDataArray[17] = 17;
+     sendDataArray[18] = 18;
+     sendDataArray[19] = 19;
+     sendDataArray[20] = 20;
+     sendDataArray[21] = 21;
+     sendDataArray[22] = 22;
+     sendDataArray[23] = 23;
+     
 
     sendDataBySound(sendDataArray);
 }
