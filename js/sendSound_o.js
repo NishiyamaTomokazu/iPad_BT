@@ -336,7 +336,7 @@ function outputSoundData(binaryDataArray) {
                  //tmp = 40;
                 while(i++ < tmp){
                     newArray[i] = 0;      //iPadイヤホンジャック出力の場合
-                    //newArray[i] = 1;        //Bluetooth出力の場合
+                    //newArray[i] = 1;    //出力を反転してみた
                 }
                 tmp = i + 30;
                 while(i++ < tmp){
