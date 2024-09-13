@@ -126,7 +126,10 @@ function connect_iPad(){
     sendDataArray[6] = 5; */
     console.log("送信開始")
 
-     sendDataArray[0] = 170;
+    sendDataArray[0] = 253;
+    sendDataArray[1] = 5;
+
+/*     sendDataArray[0] = 170;
      sendDataArray[1] = 1;
      sendDataArray[2] = 2;
      sendDataArray[3] = 3;
@@ -152,7 +155,7 @@ function connect_iPad(){
      sendDataArray[23] = 23;
 
      console.log("昇進終了")
-     
+*/     
 
     sendDataBySound(sendDataArray);
 }
