@@ -106,7 +106,7 @@ function sendHID_iPad() {
 		// sendArray[2] = i + 1;
     //WLでBluetoothで接続する場合　最初の４つのデータが無視される
         //var sendArray = new Array(23);
-        sendArray.fill(0);      //0で初期化
+/*        sendArray.fill(0);      //0で初期化
         sendArray[0] = 0;   //ダミーデータ
         sendArray[1] = 0;   //今のICでは最初のデータが送られない
         sendArray[2] = 0;
@@ -121,9 +121,9 @@ function sendHID_iPad() {
         	//sendArray[j + 7] = Number(lines[i * 16 + j]);			
             //sendArray[j + 3] = Number(lines[i * 16 + j]);			
 		}
-
+*/
         //BT-01の場合
-/*        sendArray[0] = 0;
+        sendArray[0] = 0;
         sendArray[1] = 253;
         sendArray[2] = 1;  //転送
         sendArray[3] = i + 1;
@@ -131,7 +131,7 @@ function sendHID_iPad() {
             if((i* 15 + j) > lines.length -1){break;}
             sendArray[j + 3] = Number(lines[i * 15 + j]);
         }
-*/
+
 		sendDataBySound(sendArray);  				
     	sleep(500);   		  
 		//console.log(sendArray);
