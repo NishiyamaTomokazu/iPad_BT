@@ -158,6 +158,7 @@ function connect_iPad(){
 */     
 
     sendDataBySound(sendDataArray);
+    console.log("送信終了です")
 }
 /*
 //テスト用
