@@ -62,7 +62,7 @@ function sendHID_iPad() {
 	try{
 	//プログラムの自動保存
 	autosave();
-		
+		console.log("送信開始");
     //文字プログラムに変換
     outputProData();
     //転送データに変換
