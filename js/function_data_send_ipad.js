@@ -123,13 +123,13 @@ function sendHID_iPad() {
 		}
 */
         //BT-01の場合
-        sendArray[0] = 0;
-        sendArray[1] = 253;
-        sendArray[2] = 1;  //転送
-        sendArray[3] = i + 1;
-        for(var j = 0; j < 15; j++){
-            if((i* 15 + j) > lines.length -1){break;}
-            sendArray[j + 3] = Number(lines[i * 15 + j]);
+        //sendArray[0] = 0;
+        sendArray[0] = 253;
+        sendArray[1] = 1;  //転送
+        sendArray[2] = i + 1;
+        for(var j = 0; j < 16; j++){
+            if((i* 16 + j) > lines.length -1){break;}
+            sendArray[j + 3] = Number(lines[i * 16 + j]);
         }
 
 		sendDataBySound(sendArray);  				
