@@ -114,7 +114,8 @@ var myArrayBuffer = audioCtx.createBuffer(2,frameCount,audioCtx.sampleRate);
 //     sendDataBySound(sendDataArray);
 // }
 function connect_iPad(){
-    let sendDataArray = Array(24);      //Bluetooth版のとき最初の4つ分が無視される
+    //let sendDataArray = Array(24);      //Bluetooth版のとき最初の4つ分が無視される
+    let sendDataArray = Array(19);      //BT-01
     sendDataArray.fill(0);
   //WLのICを使った場合はうまくいく    
 /*     sendDataArray[0] = 253;   //ダミーデータ
