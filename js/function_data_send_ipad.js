@@ -144,7 +144,8 @@ function sendHID_iPad() {
 //実行処理(iPad)
 function runHID_iPad(){
 	//var sendArray = new Array(23);   //WLのBluetooth
-    var sendArray = new Array(24);      //SRのBluetooth
+    //var sendArray = new Array(24);      //SRのBluetooth
+    var sendArray = new Array(19);      //BT-01のBluetooth
 	sendArray.fill(0);
 
     sendArray[0] = 253;
