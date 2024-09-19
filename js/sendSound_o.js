@@ -385,7 +385,7 @@ function outputSoundData(binaryDataArray) {
             //ストップビット
             if((counter % 8) == 0) {
                 //tmp = i+20;  //元の値
-                tmp = i + 40;
+                tmp = i + 25;
                while(i++ < tmp){
                     newArray[i] = 0;
                     //newArray[i] = 1;
