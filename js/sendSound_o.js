@@ -350,23 +350,27 @@ function outputSoundData(binaryDataArray) {
                 }
             }
             if(x == 0){
-                tmp = i + 5;
+                //tmp = i + 5;  //元データ
+                tmp = i + 10;
                 while(i++ < tmp){
                     newArray[i] = 0;
                     //newArray[i] = 1;
                 }
-                tmp = i + 5;
+                //tmp = i + 5;
+                tmp = i + 10;
                 while(i++ < tmp){
                     newArray[i] = 1;
                     //newArray[i] = 0;
                  }
             } else {
-                tmp = i + 5;
+                //tmp = i + 5;
+                tmp = i + 10;
                 while(i++ < tmp){
                     newArray[i] = 0;
                     //newArray[i] = 1;
                 }
-                tmp = i + 15;
+                //tmp = i + 15;
+                tmp = i + 30;
                 while(i++ < tmp){
                     newArray[i] = 1;
                     //newArray[i] = 0;
