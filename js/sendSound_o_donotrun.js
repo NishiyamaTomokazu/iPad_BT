@@ -61,7 +61,8 @@ var myArrayBuffer = audioCtx.createBuffer(2,frameCount,audioCtx.sampleRate);
  * 
 **************************************/
 //送信用のデータの入った配列
-let sendDataArray = Array(19);
+//let sendDataArray = Array(19);
+//let sendDataArray = Array(24);      //Bluetooth版のとき最初の4つ分が無視される
 
 /**************************************
  * データの転送方法
@@ -82,13 +83,85 @@ let sendDataArray = Array(19);
  * iPadに接続し直したときには、最初に行う
  * 0を送る
 **************************************/
+// function connect_iPad(){
+//     sendDataArray.fill(0);
+//     //sendDataArray[0] = 253;
+//     //sendDataArray[1] = 5;
+//     sendDataArray[0] = 0;
+//     sendDataArray[1] = 1;
+//     sendDataArray[2] = 2;
+//     sendDataArray[3] = 3;
+//     sendDataArray[4] = 253;
+//     sendDataArray[5] = 5;
+//     sendDataArray[6] = 6;
+//     // sendDataArray[7] = 7;
+//     // sendDataArray[8] = 8;
+//     // sendDataArray[9] = 9;
+//     // sendDataArray[10] = 10;
+//     // sendDataArray[11] = 11;
+//     // sendDataArray[12] = 12;
+//     // sendDataArray[13] = 13;
+//     // sendDataArray[14] = 14;
+//     // sendDataArray[15] = 15;
+//     // sendDataArray[16] = 16;
+//     // sendDataArray[17] = 17;
+//     // sendDataArray[18] = 18;
+//     // sendDataArray[19] = 19;
+//     // sendDataArray[20] = 20;
+//     // sendDataArray[21] = 21;
+//     // sendDataArray[22] = 22;
+//     // sendDataArray[23] = 23;
+//     sendDataBySound(sendDataArray);
+// }
 function connect_iPad(){
+    //let sendDataArray = Array(24);      //Bluetooth版のとき最初の4つ分が無視される
+    let sendDataArray = Array(19);      //BT-01
     sendDataArray.fill(0);
+  //WLのICを使った場合はうまくいく    
+/*     sendDataArray[0] = 253;   //ダミーデータ
+    sendDataArray[1] = 1;
+    sendDataArray[2] = 2;
+    sendDataArray[3] = 3;   //ここまで
+    sendDataArray[4] = 4;
+    sendDataArray[5] = 253;
+    sendDataArray[6] = 5; */
+    console.log("送信開始")
+
     sendDataArray[0] = 253;
     sendDataArray[1] = 5;
-    sendDataBySound(sendDataArray);
-}
 
+/*     sendDataArray[0] = 170;
+     sendDataArray[1] = 1;
+     sendDataArray[2] = 2;
+     sendDataArray[3] = 3;
+     sendDataArray[4] = 4;
+     sendDataArray[5] = 5;
+     sendDataArray[6] = 6;
+     sendDataArray[7] = 7;
+     sendDataArray[8] = 8;
+     sendDataArray[9] = 9;
+     sendDataArray[10] = 10;
+     sendDataArray[11] = 11;
+     sendDataArray[12] = 12;
+     sendDataArray[13] = 13;
+     sendDataArray[14] = 14;
+     sendDataArray[15] = 15;
+     sendDataArray[16] = 16;
+     sendDataArray[17] = 17;
+     sendDataArray[18] = 18;
+     sendDataArray[19] = 19;
+     sendDataArray[20] = 20;
+     sendDataArray[21] = 21;
+     sendDataArray[22] = 22;
+     sendDataArray[23] = 23;
+
+     console.log("昇進終了")
+*/     
+
+    sendDataBySound(sendDataArray);
+    console.log("送信終了です")
+}
+/*
 //テスト用
 function soundRed(){
     sendDataArray.fill(0);      //0で初期化
@@ -175,7 +248,18 @@ function sendLoop(){
     sendDataArray[25] = 231;
     sendDataBySound(sendDataArray);
 }
-
+*/
+//有線版の場合
+// function soundRun() {
+//     sendDataArray.fill(0);
+//     //実行
+//     sendDataArray[0] = 253;             //iPadモード
+//     sendDataArray[1] = 2;               //実行
+//                                         //以降の配列は、0が入っているので、そのままで良い
+//     sendDataBySound(sendDataArray);
+//     //console.log(sendDataArray);
+// }
+//Bluetooth版
 function soundRun() {
     sendDataArray.fill(0);
     //実行
@@ -253,40 +337,58 @@ function outputSoundData(binaryDataArray) {
         element.map(x => {
             //スタートビット
              if((counter % 8) == 0) {
-                 tmp = 20;
+                tmp = 20;  //元の値
                 while(i++ < tmp){
-                    newArray[i] = 0;
+                    newArray[i] = 0;      //iPadイヤホンジャック出力の場合
+                    //newArray[i] = 1;    //出力を反転してみた
                 }
                 tmp = i + 30;
                 while(i++ < tmp){
                     newArray[i] = 1;
+                    //newArray[i] = 0;
                 }
             }
             if(x == 0){
-                tmp = i + 5;
+                tmp = i + 5;  //元データ
+                //tmp = i + 10;  //ちょっと大きかった
+                //tmp = i + 8;
+                //tmp = i + 8;
                 while(i++ < tmp){
                     newArray[i] = 0;
+                    //newArray[i] = 1;
                 }
                 tmp = i + 5;
+                //tmp = i + 10;
+                //tmp = i + 8;
                 while(i++ < tmp){
                     newArray[i] = 1;
+                    //newArray[i] = 0;
                  }
             } else {
                 tmp = i + 5;
+                //tmp = i + 10;
+                //tmp = i + 8;
                 while(i++ < tmp){
                     newArray[i] = 0;
+                    //newArray[i] = 1;
                 }
                 tmp = i + 15;
+                //tmp = i + 30;
+                //tmp = i + 22;
                 while(i++ < tmp){
                     newArray[i] = 1;
+                    //newArray[i] = 0;
                 }
             }
             counter++;
             //ストップビット
             if((counter % 8) == 0) {
-                tmp = i+20;
+                tmp = i+20;  //元の値
+                //tmp = i + 25;
+                //tmp = i + 30;
                while(i++ < tmp){
-                   newArray[i] = 0;
+                    newArray[i] = 0;
+                    //newArray[i] = 1;
                }
             }
         })
