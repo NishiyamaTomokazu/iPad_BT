@@ -253,36 +253,36 @@ function outputSoundData(binaryDataArray) {
         element.map(x => {
             //スタートビット
              if((counter % 8) == 0) {
-                //tmp = 20; #デフォルト
-                tmp = 30;     //変更
+                tmp = 20; #デフォルト
+                //tmp = 30;     //変更
                 while(i++ < tmp){
                     newArray[i] = 0;
                 }
-                //tmp = i + 30; //デフォルト
-                tmp = i + 40;     //変更
+                tmp = i + 30; //デフォルト
+                //tmp = i + 40;     //変更
                 while(i++ < tmp){
                     newArray[i] = 1;
                 }
             }
             if(x == 0){
-                //tmp = i + 5;
-                tmp = i +15;     //変更
+                tmp = i + 5;
+                //tmp = i +15;     //変更
                 while(i++ < tmp){
                     newArray[i] = 0;
                 }
-                //tmp = i + 5;  //デフォルト
-                tmp = i +15;     //変更
+                tmp = i + 5;  //デフォルト
+                //tmp = i +15;     //変更
                 while(i++ < tmp){
                     newArray[i] = 1;
                  }
             } else {
-                //tmp = i + 5;  //デフォルト
-                tmp = i +15;     //変更
+                tmp = i + 5;  //デフォルト
+                //tmp = i +15;     //変更
                 while(i++ < tmp){
                     newArray[i] = 0;
                 }
-                //tmp = i + 15; //デフォルト
-                tmp = i +25;     //変更
+                tmp = i + 15; //デフォルト
+                //tmp = i +25;     //変更
                 while(i++ < tmp){
                     newArray[i] = 1;
                 }
@@ -290,8 +290,8 @@ function outputSoundData(binaryDataArray) {
             counter++;
             //ストップビット
             if((counter % 8) == 0) {
-                //tmp = i+20; //デフォルト
-                tmp = i +30;     //変更
+                tmp = i+20; //デフォルト
+                //tmp = i +30;     //変更
                while(i++ < tmp){
                    newArray[i] = 0;
                }
