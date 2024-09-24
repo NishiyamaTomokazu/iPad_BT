@@ -343,34 +343,42 @@ function outputSoundData(binaryDataArray) {
                     newArray[i] = 0;
                 }
                 tmp = 5;
+                i = 0;
                 while(i++ < tmp){
                     newArray[i] = 1;
                 }
                 tmp = 5;
+                i = 0;
                 while(i++ < tmp){
                     newArray[i] = 0;
                 }
                 tmp = 5;
+                i = 0;
                 while(i++ < tmp){
                     newArray[i] = 1;
                 }
                 tmp = 5;
+                i = 0;
                 while(i++ < tmp){
                     newArray[i] = 0;
                 }
                 tmp = 5;
+                i = 0;
                 while(i++ < tmp){
                     newArray[i] = 1;
                 }
                 tmp = 5;
+                i = 0;
                 while(i++ < tmp){
                     newArray[i] = 0;
                 }
                 tmp = 5;
+                i = 0;
                 while(i++ < tmp){
                     newArray[i] = 1;
                 }
-                //スタートビット
+                //スタ-トビット
+                i = 0;
                 tmp = 20;  //元の値
                 while(i++ < tmp){
                     newArray[i] = 0;      //iPadイヤホンジャック出力の場合
