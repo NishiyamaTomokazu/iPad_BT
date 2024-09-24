@@ -247,13 +247,13 @@ function outputSoundData(binaryDataArray) {
     var newArray = myArrayBuffer.getChannelData(0);     //変換データを保存する配列
     let counter = 0;    //8ビット数えるためのカウンタ
     let i = 0;  //出力用の配列の現在値
-    var tmp = 0;
+    var tmp = 10;
     //console.log(newArray);
     binaryDataArray.forEach(element => {
         element.map(x => {
             //スタートビット
              if((counter % 8) == 0) {
-                 tmp = 20;
+                tmp = 20;
                 while(i++ < tmp){
                     newArray[i] = 0;
                 }
