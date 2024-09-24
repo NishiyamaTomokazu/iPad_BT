@@ -253,7 +253,7 @@ function outputSoundData(binaryDataArray) {
         element.map(x => {
             //スタートビット
              if((counter % 8) == 0) {
-                tmp = 20; #デフォルト
+                tmp = 20; //#デフォルト
                 //tmp = 30;     //変更
                 while(i++ < tmp){
                     newArray[i] = 0;
