@@ -337,16 +337,46 @@ function outputSoundData(binaryDataArray) {
         element.map(x => {
             //スタートビット
              if((counter % 8) == 0) {
+                //ダミービット
+                tmp = 5;
+                while(i++ < tmp){
+                    newArray[i] = 0;
+                }
+                tmp = 5;
+                while(i++ < tmp){
+                    newArray[i] = 1;
+                }
+                tmp = 5;
+                while(i++ < tmp){
+                    newArray[i] = 0;
+                }
+                tmp = 5;
+                while(i++ < tmp){
+                    newArray[i] = 1;
+                }
+                tmp = 5;
+                while(i++ < tmp){
+                    newArray[i] = 0;
+                }
+                tmp = 5;
+                while(i++ < tmp){
+                    newArray[i] = 1;
+                }
+                tmp = 5;
+                while(i++ < tmp){
+                    newArray[i] = 0;
+                }
+                tmp = 5;
+                while(i++ < tmp){
+                    newArray[i] = 1;
+                }
+                //スタートビット
                 tmp = 20;  //元の値
-                 //tmp = 40;
-                //tmp = 30;
                 while(i++ < tmp){
                     newArray[i] = 0;      //iPadイヤホンジャック出力の場合
                     //newArray[i] = 1;    //出力を反転してみた
                 }
                 tmp = i + 30;
-                //tmp = i + 80;
-                //tmp = 45;
                 while(i++ < tmp){
                     newArray[i] = 1;
                     //newArray[i] = 0;
