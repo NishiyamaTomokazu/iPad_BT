@@ -337,7 +337,7 @@ function outputSoundData(binaryDataArray) {
         element.map(x => {
             //スタートビット
              if((counter % 8) == 0) {
-                //ダミービット
+/*                //ダミービット
                 tmp = 5;
                 while(i++ < tmp){
                     newArray[i] = 0;
@@ -377,8 +377,8 @@ function outputSoundData(binaryDataArray) {
                 while(i++ < tmp){
                     newArray[i] = 1;
                 }
+                    */
                 //スタ-トビット
-                i = 0;
                 tmp = 20;  //元の値
                 while(i++ < tmp){
                     newArray[i] = 0;      //iPadイヤホンジャック出力の場合
