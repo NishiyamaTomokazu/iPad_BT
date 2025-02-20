@@ -299,11 +299,37 @@ function outputSoundData(binaryDataArray) {
             }
         })
     });
+    //無音を再生
+    playSilentAudio();
+    console.log("無音再生");
     console.log(newArray);
     var source = audioCtx.createBufferSource();     //出力用のバッファを作成
     source.buffer = myArrayBuffer;                  //出力用のバッファに変換したデータを入れる
     source.connect(audioCtx.destination);           //出力先に接続する
-    source.start();                                 //再生開始
+    source.start();
+    console.log("データ音再生");
+}
+
+function playSilentAudio() {
+    var AudioContext = window.AudioContext || window.webkitAudioContext;
+    var audioCtx = new AudioContext();
+    var channels = 2;
+    var frameCount = audioCtx.sampleRate * 0.1;  //0.1秒間の無音
+    var myArrayBuffer = audioCtx.createBuffer(channels, frameCount, audioCtx.sampleRate);
+
+    //バッファをゼロで埋める
+    for (var channel = 0; channel < channels; channel++) {
+        var nowBuffering = myArrayBuffer.getChannelData(channel);
+        for (var i = 0; i < frameCount; i++) {
+            nowBuffering[i] = 0;
+        }
+    }
+
+    //バッファを再生する
+    var source = audioCtx.createBufferSource();
+    source.buffer = myArrayBuffer;
+    source.connect(audioCtx.destination);
+    source.start();
 }
 
 

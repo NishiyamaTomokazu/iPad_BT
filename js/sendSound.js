@@ -113,7 +113,6 @@ function connect_iPad(){
         sendDataArray[17] = 17;
         sendDataArray[18] = 18;
     sendDataBySound(sendDataArray);
-    console.log("接続処理！");
 }
 
 //テスト用
