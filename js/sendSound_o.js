@@ -300,8 +300,8 @@ function outputSoundData(binaryDataArray) {
         })
     });
     //無音を再生
-    playSilentAudio();
-    console.log("無音再生");
+    //playSilentAudio();
+    //console.log("無音再生");
     //console.log(newArray);
     var source = audioCtx.createBufferSource();     //出力用のバッファを作成
     source.buffer = myArrayBuffer;                  //出力用のバッファに変換したデータを入れる
