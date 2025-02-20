@@ -133,7 +133,7 @@ function sendHID_iPad() {
         }
 
 		sendDataBySound(sendArray);  				
-    	sleep(500);   		  
+    	sleep(１00);   		  
 		//console.log(sendArray);
 		document.form6.textarea5.value +=sendArray+"\n";
 	}
