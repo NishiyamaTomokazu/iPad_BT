@@ -87,6 +87,7 @@ function connect_iPad(){
     sendDataArray[0] = 253;
     sendDataArray[1] = 5;
     sendDataBySound(sendDataArray);
+    console("接続処理った");
 }
 
 //テスト用
