@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iPad Safari オーディオデモ</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f7;
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        
+        .number-display {
+            font-size: 32px;
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .links-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .sound-link {
+            display: inline-block;
+            padding: 15px 25px;
+            background-color: #0071e3;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 18px;
+            margin: 5px;
+            transition: background-color 0.2s;
+        }
+        
+        .sound-link:active {
+            background-color: #005bbf;
+        }
+        
+        .edit-button {
+            display: block;
+            margin: 30px auto;
+            padding: 12px 24px;
+            background-color: #333;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: l5px;
+            width: 80%;
+            max-width: 400px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+        
+        .modal h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .modal-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .cancel-button {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        
+        .save-button {
+            background-color: #0071e3;
+            color: white;
+        }
+        
+        .instruction {
+            text-align: center;
+            margin: 30px 0;
+            color: #666;
+        }
+        
+        .status-message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <h1>iPadのSafariオーディオテスト</h1>
+    
+    <div class="instruction">
+        下の数字は現在の値です。「編集」ボタンをクリックしてダイアログを開き、値を変更できます。
+    </div>
+    
+    <div class="number-display" id="numberDisplay">42</div>
+    
+    <button class="edit-button" id="editButton">編集</button>
+    
+    <div class="instruction">
+        下のリンクをタップすると音が鳴ります。ダイアログを開いて閉じた後も、すぐに音が鳴るはずです。
+    </div>
+    
+    <div class="links-container">
+        <a href="#" class="sound-link" data-sound="do">ド</a>
+        <a href="#" class="sound-link" data-sound="re">レ</a>
+        <a href="#" class="sound-link" data-sound="mi">ミ</a>
+        <a href="#" class="sound-link" data-sound="fa">ファ</a>
+        <a href="#" class="sound-link" data-sound="so">ソ</a>
+        <a href="#" class="sound-link" data-sound="la">ラ</a>
+        <a href="#" class="sound-link" data-sound="si">シ</a>
+        <a href="#" class="sound-link" data-sound="do_high">ド(高)</a>
+    </div>
+    
+    <div class="status-message" id="statusMessage"></div>
+    
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <h2>数値を編集</h2>
+            <div class="form-group">
+                <label for="numberInput">新しい数値:</label>
+                <input type="number" id="numberInput" value="42">
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-button cancel-button" id="cancelButton">キャンセル</button>
+                <button class="modal-button save-button" id="saveButton">保存</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // メインの変数と初期設定
+        let audioContext = null;
+        let oscillators = {};
+        let audioInitialized = false;
+        const soundFrequencies = {
+            do: 261.63,     // C4
+            re: 293.66,     // D4
+            mi: 329.63,     // E4
+            fa: 349.23,     // F4
+            so: 392.00,     // G4
+            la: 440.00,     // A4
+            si: 493.88,     // B4
+            do_high: 523.25 // C5
+        };
+        
+        // DOM要素の取得
+        const numberDisplay = document.getElementById('numberDisplay');
+        const editButton = document.getElementById('editButton');
+        const editModal = document.getElementById('editModal');
+        const numberInput = document.getElementById('numberInput');
+        const cancelButton = document.getElementById('cancelButton');
+        const saveButton = document.getElementById('saveButton');
+        const soundLinks = document.querySelectorAll('.sound-link');
+        const statusMessage = document.getElementById('statusMessage');
+        
+        // オーディオシステムの初期化
+        function initAudioSystem() {
+            try {
+                // 既存のコンテキストを閉じる
+                if (audioContext) {
+                    audioContext.close();
+                }
+                
+                // 新しいオーディオコンテキストを作成
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                console.log("オーディオシステムが初期化されました");
+                
+                if (audioContext.state === "running") {
+                    audioInitialized = true;
+                    updateStatus("オーディオシステム準備完了");
+                } else {
+                    updateStatus("次のタップで音が有効になります");
+                }
+                
+                return true;
+            } catch (error) {
+                console.error("オーディオシステムの初期化に失敗:", error);
+                updateStatus("オーディオシステムの初期化に失敗しました");
+                return false;
+            }
+        }
+        
+        // ステータスメッセージを更新
+        function updateStatus(message) {
+            statusMessage.textContent = message;
+            // 5秒後にメッセージをクリア
+            setTimeout(() => {
+                if (statusMessage.textContent === message) {
+                    statusMessage.textContent = "";
+                }
+            }, 5000);
+        }
+        
+        // 音を再生する関数
+        function playSound(event) {
+            event.preventDefault();
+            
+            // オーディオコンテキストが存在しない場合は初期化
+            if (!audioContext) {
+                if (!initAudioSystem()) {
+                    return;
+                }
+            }
+            
+            // オーディオコンテキストが一時停止中の場合は再開
+            if (audioContext.state !== 'running') {
+                audioContext.resume().then(() => {
+                    console.log("オーディオコンテキストが再開されました");
+                    audioInitialized = true;
+                    updateStatus("音が有効になりました");
+                    // 再開後に音を再生
+                    playTone(event.currentTarget.getAttribute('data-sound'));
+                }).catch(error => {
+                    console.error("オーディオコンテキストの再開に失敗:", error);
+                    updateStatus("音の有効化に失敗しました");
+                });
+                return;
+            }
+            
+            // 通常の再生処理
+            playTone(event.currentTarget.getAttribute('data-sound'));
+        }
+        
+        // 実際に音を生成・再生する関数
+        function playTone(soundType) {
+            const frequency = soundFrequencies[soundType];
+            
+            if (!frequency) return;
+            
+            // 以前のオシレーターが存在する場合は停止して削除
+            if (oscillators[soundType]) {
+                oscillators[soundType].stop();
+                oscillators[soundType].disconnect();
+                delete oscillators[soundType];
+            }
+            
+            try {
+                // 新しいオシレーターを作成
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime);
+                
+                // エンベロープの設定
+                gainNode.gain.setValueAtTime(0, audioContext.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.5, audioContext.currentTime + 0.01);
+                gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
+                
+                // 接続と開始
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                oscillator.start();
+                
+                // 0.5秒後にオシレーターを停止
+                setTimeout(() => {
+                    oscillator.stop();
+                    oscillator.disconnect();
+                    gainNode.disconnect();
+                    delete oscillators[soundType];
+                }, 500);
+                
+                // 現在のオシレーターを保存
+                oscillators[soundType] = oscillator;
+                
+                console.log(`${soundType} の音が再生されました (${frequency}Hz)`);
+            } catch (error) {
+                console.error(`${soundType} の音の再生に失敗:`, error);
+            }
+        }
+        
+        // オーディオコンテキストを再開する関数（ユーザーインタラクション時に呼び出し）
+        function resumeAudioContext() {
+            if (audioContext && audioContext.state !== 'running') {
+                audioContext.resume().then(() => {
+                    console.log("オーディオコンテキストが再開されました");
+                    audioInitialized = true;
+                    updateStatus("音が有効になりました");
+                }).catch(error => {
+                    console.error("オーディオコンテキストの再開に失敗:", error);
+                });
+            }
+        }
+        
+        // イベントリスナーの設定
+        function setupEventListeners() {
+            // 音声リンクのイベントリスナー
+            soundLinks.forEach(link => {
+                // 既存のリスナーを削除（重複を避けるため）
+                link.removeEventListener('click', playSound);
+                link.removeEventListener('touchstart', playSound);
+                
+                // 新しいリスナーを追加
+                link.addEventListener('click', playSound);
+                // iOS Safariではclickよりもtouchstartの方が反応が良い
+                link.addEventListener('touchstart', playSound);
+            });
+            
+            console.log("サウンドリンクのイベントリスナーが設定されました");
+        }
+        
+        // 編集ボタンのイベントリスナー
+        editButton.addEventListener('click', () => {
+            numberInput.value = numberDisplay.textContent;
+            editModal.style.display = 'flex';
+        });
+        
+        // キャンセルボタンのイベントリスナー
+        cancelButton.addEventListener('click', () => {
+            editModal.style.display = 'none';
+            // ダイアログを閉じる操作をユーザーインタラクションとして利用
+            resumeAudioContext();
+        });
+        
+        // 保存ボタンのイベントリスナー
+        saveButton.addEventListener('click', () => {
+            const newValue = parseInt(numberInput.value) || 0;
+            numberDisplay.textContent = newValue;
+            editModal.style.display = 'none';
+            // ダイアログを閉じる操作をユーザーインタラクションとして利用
+            resumeAudioContext();
+        });
+        
+        // ページ全体のタッチイベントでもオーディオを有効化
+        document.body.addEventListener('touchstart', function() {
+            if (!audioInitialized) {
+                if (!audioContext) {
+                    initAudioSystem();
+                }
+                resumeAudioContext();
+            }
+        }, { once: false });
+        
+        // ページロード時の初期化
+        window.addEventListener('DOMContentLoaded', () => {
+            // 初期オーディオ設定
+            initAudioSystem();
+            setupEventListeners();
+            
+            // iOS SafariではDOMContentLoadedでも初期化できない場合があるので
+            // 最初のユーザーインタラクションを待つメッセージを表示
+            if (!audioInitialized) {
+                updateStatus("画面をタップすると音が有効になります");
+            }
+        });
+    </script>
+</body>
+</html>

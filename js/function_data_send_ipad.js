@@ -92,6 +92,26 @@ function sendHID_iPad() {
     //        throw new Error("エラーメッセージ");
     //    }
     //}
+
+        //ダミーデータを送信する
+        var sendArray = new Array(19);   //Bluetoothの場合の設定
+    	sendArray.fill(0);
+
+        //BT-01の場合
+        //sendArray[0] = 0;
+        sendArray[0] = 253;
+        sendArray[1] = 6;  //転送
+        sendArray[2] = i + 1;
+        for(var j = 0; j < 16; j++){
+            if((i* 16 + j) > lines.length -1){break;}
+            sendArray[j + 3] = Number(lines[i * 16 + j]);
+        }
+
+		sendDataBySound(sendArray);
+    	sleep(100);
+		//console.log(sendArray);
+		document.form6.textarea5.value +=sendArray+"\n";
+        //ダミーデータを送信する
         
 	document.form6.textarea5.value ="";
     var blcnt = Math.ceil(lines.length / 16);//32バイトずつ転送するので何ブロックあるか
@@ -111,8 +131,8 @@ function sendHID_iPad() {
             sendArray[j + 3] = Number(lines[i * 16 + j]);
         }
 
-		sendDataBySound(sendArray);  				
-    	sleep(100);   		  
+		sendDataBySound(sendArray);
+    	sleep(100);
 		//console.log(sendArray);
 		document.form6.textarea5.value +=sendArray+"\n";
 	}
