@@ -94,7 +94,7 @@ function sendHID_iPad() {
     //}
 
         //ダミーデータを送信する
-         var sendArray = new Array(19);   //Bluetoothの場合の設定
+/*          var sendArray = new Array(19);   //Bluetoothの場合の設定
     	 sendArray.fill(0);
 
          //BT-01の場合
@@ -110,7 +110,7 @@ function sendHID_iPad() {
 		 sendDataBySound(sendArray);
     	 sleep(100);
 		console.log(sendArray);
-		 document.form6.textarea5.value +=sendArray+"\n";
+		 document.form6.textarea5.value +=sendArray+"\n"; */
         //ダミーデータを送信する
 
 	document.form6.textarea5.value ="";
