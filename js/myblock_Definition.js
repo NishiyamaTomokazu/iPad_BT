@@ -424,6 +424,8 @@ Blockly.Blocks['backlight_time'] = {
   init: function() {
     this.appendDummyInput()
         .appendField("バックライトを")
+        .appendField(new Blockly.FieldNumber(100, 1, 100, 1), "backlightlight")
+        .appendField("％で")
         .appendField(new Blockly.FieldNumber(1, 0.25, 31.75, 0.25), "backlighttime")
         .appendField("秒間点灯する");
     this.setPreviousStatement(true, null);
@@ -523,7 +525,23 @@ Blockly.Blocks['timer_dark'] = {
  this.setHelpUrl("");
   }
 };
-
+Blockly.Blocks['timer_clock'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("動作停止")
+        .appendField(new Blockly.FieldNumber(1, 1, 255, 1), "timertime")
+        .appendField("秒 or ")
+	    .appendField(new Blockly.FieldNumber(12, 0, 23, 1), "sethour")
+        .appendField("時")
+	    .appendField(new Blockly.FieldNumber(0, 0, 59, 1), "setminute")
+        .appendField("分になるまで");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour("#ff8c1a");
+ this.setTooltip("一定時間動作を停止します");
+ this.setHelpUrl("");
+  }
+};
 Blockly.Blocks['wait_sound'] = {
   init: function() {
     this.appendDummyInput()
@@ -598,15 +616,14 @@ Blockly.Blocks['wait_signal'] = {
 Blockly.Blocks['wait_alerm'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("アラーム時刻になるまで待つ");
+        .appendField("アラーム信号があるまで待つ");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour("#5cb1d6");
- this.setTooltip("アラーム時刻になるまで待つ");
+ this.setTooltip("アラームが鳴るまで停止します");
  this.setHelpUrl("");
   }
 };
-
 Blockly.Blocks['sound1'] = {
   init: function() {
     this.appendDummyInput()
@@ -643,22 +660,13 @@ Blockly.Blocks['sound3'] = {
 Blockly.Blocks['soundplay'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField("音プログラムを再生する")	  
+        .appendField("音プログラム")	  
+	    .appendField(new Blockly.FieldNumber(1, 1, 3, 1), "sundno")
+        .appendField("番を再生する");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour("#cf63cf");
  this.setTooltip("音プログラムを再生します");
- this.setHelpUrl("");
-  }
-};
-Blockly.Blocks['alarmplay'] = {
-  init: function() {
-    this.appendDummyInput()
-        .appendField("目覚まし時計に設定")	  
-    this.setPreviousStatement(true, null);
-    this.setNextStatement(true, null);
-    this.setColour("#cf63cf");
- this.setTooltip("目覚まし時計に設定");
  this.setHelpUrl("");
   }
 };

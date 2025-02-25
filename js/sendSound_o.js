@@ -13,7 +13,6 @@ var frameCount = audioCtx.sampleRate * 20.0
 var myArrayBuffer = audioCtx.createBuffer(2,frameCount,audioCtx.sampleRate);
 
 
-
 /*************************************
  * 
  * 送信用のデータを入れる配列
@@ -88,7 +87,6 @@ function connect_iPad(){
     sendDataArray[0] = 253;
     sendDataArray[1] = 5;
     sendDataBySound(sendDataArray);
-    console.log("接続処理った");
 }
 
 //テスト用
@@ -255,36 +253,30 @@ function outputSoundData(binaryDataArray) {
         element.map(x => {
             //スタートビット
              if((counter % 8) == 0) {
-                tmp = 20; //#デフォルト
-                //tmp = 30;     //変更
+                 tmp = 20;
                 while(i++ < tmp){
                     newArray[i] = 0;
                 }
-                tmp = i + 30; //デフォルト
-                //tmp = i + 40;     //変更
+                tmp = i + 30;
                 while(i++ < tmp){
                     newArray[i] = 1;
                 }
             }
             if(x == 0){
                 tmp = i + 5;
-                //tmp = i +15;     //変更
                 while(i++ < tmp){
                     newArray[i] = 0;
                 }
-                tmp = i + 5;  //デフォルト
-                //tmp = i +15;     //変更
+                tmp = i + 5;
                 while(i++ < tmp){
                     newArray[i] = 1;
                  }
             } else {
-                tmp = i + 5;  //デフォルト
-                //tmp = i +15;     //変更
+                tmp = i + 5;
                 while(i++ < tmp){
                     newArray[i] = 0;
                 }
-                tmp = i + 15; //デフォルト
-                //tmp = i +25;     //変更
+                tmp = i + 15;
                 while(i++ < tmp){
                     newArray[i] = 1;
                 }
@@ -292,25 +284,19 @@ function outputSoundData(binaryDataArray) {
             counter++;
             //ストップビット
             if((counter % 8) == 0) {
-                tmp = i+20; //デフォルト
-                //tmp = i +30;     //変更
+                tmp = i+20;
                while(i++ < tmp){
                    newArray[i] = 0;
                }
             }
         })
     });
-    //無音を再生
-    // playSilentAudio();
-    // console.log("無音★再生");
-    //console.log(newArray);
+    console.log(newArray);
     var source = audioCtx.createBufferSource();     //出力用のバッファを作成
     source.buffer = myArrayBuffer;                  //出力用のバッファに変換したデータを入れる
     source.connect(audioCtx.destination);           //出力先に接続する
-    source.start();
-    console.log("データ音再生");
+    source.start();                                 //再生開始
 }
-
 
 
 

@@ -5,7 +5,7 @@ function sendHID(){
 	autosave();
 	//console.log(usb_info_HID());
 	if (usb_info_HID() == false){		
-        alert("オーロラクロック3が接続されておりません");
+        alert("オーロラクロック2Nが接続されておりません");
 		return;
 	}
     //文字プログラムに変換
@@ -57,7 +57,7 @@ function sendHID(){
 //HIDデバイスの実行
 function runHID(){
 	if (usb_info_HID() == false){		
-        alert("オーロラクロック3が接続されておりません");
+        alert("オーロラクロック2Nが接続されておりません");
 		return;
 	}
 	let runData = new Array();

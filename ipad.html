@@ -111,7 +111,7 @@
         <ul id="delete_restoreList">
         </ul>
         <div class="modalFooter">
-          <a onclick="delete_cancelRestoreBlocks()">キャンセル</a>
+          <a onclick="cancelRestoreBlocks()">キャンセル</a>
         </div>
       </div>
     </div>
@@ -127,7 +127,13 @@
     <block type="if_block_swon"></block>
     <block type="if_block_swoff"></block>
     <block type="if_block_light"></block>
-    <block type="if_block_dark"></block> 
+    <block type="if_block_dark"></block>    
+    <block type="if_block_tempup"></block>
+    <block type="if_block_tempdown"></block>
+    <block type="if_block_tempeq"></block>
+    <block type="if_block_henup"></block>
+    <block type="if_block_hendown"></block>
+    <block type="if_block_heneq"></block>
   </category>
   <category name="LED 点灯" colour="#00aaff">
     <block type="led_red">
@@ -196,6 +202,7 @@
   </category>
   <category name="バックライト" colour="#8a97b8">
     <block type="backlight_time">
+      <field name="backlightlight">100</field>
       <field name="backlighttime">1</field>
     </block>
     <block type="backlight_conti"></block>
@@ -219,6 +226,10 @@
       <field name="timertime">1</field>
       <field name="timerlight">50</field>
     </block>
+    <block type="timer_temp">
+      <field name="timertime">1</field>
+      <field name="timertemp">25</field>
+    </block>
   </category>
   <category name="信号待ち" colour="#5cb1d6">
     <block type="wait_sound"></block>
@@ -229,7 +240,9 @@
     <block type="wait_dark">
       <field name="waitlight">50</field>
     </block>
-    <block type="wait_clock"></block>
+    <block type="wait_temp">
+      <field name="waitlight">25</field>
+    </block>
     <block type="wait_signal"></block>
     <block type="wait_alerm"></block>
   </category>
@@ -238,16 +251,18 @@
     <block type="sound2"></block>
     <block type="sound3"></block>
     <block type="soundplay"></block>
-    <block type="alarmplay"></block>
   </category>
   <category name="出力" colour="#ff7385">
     <block type="outputSignal"></block>
-    <!--<block type="outputdc_time"></block>
+    <block type="outputdc_time"></block>
     <block type="outputdc_cont"></block>
     <block type="outputdc_off"></block>
     <block type="outputmame_time"></block>
     <block type="outputmame_cont"></block>
-    <block type="outputmame_off"></block>-->
+    <block type="outputmame_off"></block>
+  </category>
+  <category name="変数" colour="#a34a1d">
+    <block type="input_variable"></block>
   </category>
 </xml>
     <script>
@@ -276,7 +291,7 @@
 			var file = ev.target.files[0];
 			var filename = file.name.split('.');
 			var reader = new FileReader();
-			if (filename[1] == "ud1" || filename[1] == "ud1f" || filename[1] == "ud1w"){
+			if (filename[1] == "cuc7" || filename[1] == "cuc7f" || filename[1] == "cuc7w"){
 			  reader.readAsText(file, 'UTF-8');
 			}
 			reader.onload = function(e){
@@ -319,12 +334,12 @@
 			var handleDroppedFile = function(event) {
 				// ファイルは複数ドロップされる可能性がありますが, ここでは 1 つ目のファイルを扱います.
 				var file = event.originalEvent.dataTransfer.files[0];
-				if (strSplit(file.name,1,".") == "ud1f" || strSplit(file.name,1,".") == "ud1" || strSplit(file.name,1,".") == "ud1w"){
+				if (strSplit(file.name,1,".") == "cuc7f" || strSplit(file.name,1,".") == "cuc7" || strSplit(file.name,1,".") == "cuc7w"){
 					// ファイルの内容は FileReader で読み込みます.
 					var fileReader = new FileReader();					
 					fileReader.onload = function(event) {
 					  // event.target.result に読み込んだファイルの内容が入っています.		
-						if (strSplit(file.name,1,".") == "ud1"){
+						if (strSplit(file.name,1,".") == "cuc7"){
 					  		uploadCode(event.target.result);
 						}
 						else{
@@ -351,7 +366,7 @@
       });
     </script>
 	  
-  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">001オーロラクロック3(iPad)
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">オーロラクロック3(iPad)
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1" aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent1">
     <ul class="navbar-nav mx-auto">
@@ -362,7 +377,7 @@
 			<a class="dropdown-item aback" ontouchstart="" onclick="restoreBlocks()" href="#">ブラウザから読み込み</a>
             <div class="dropdown-divider"></div>
 			<a class="dropdown-item aback" ontouchstart="" onclick="downloadCode_ipad()" href="#" id="filesave">ファイルへ保存</a>
-			<label class="dropdown-item read_label aback" ontouchstart=""><form name="test">ファイルから読み込み<input type="file" id="readfile" accept=".ud1f,.ud1,.ud1w" hidden></form></label>
+			<label class="dropdown-item read_label aback" ontouchstart=""><form name="test">ファイルから読み込み<input type="file" id="readfile" accept=".cuc7f,.cuc7,.cuc7w" hidden></form></label>
 			<div class="dropdown-divider"></div>
 			<a class="dropdown-item aback" ontouchstart="" onclick="read_demo(1)" href="#">デモ1(順次)</a>
 			<a class="dropdown-item aback" ontouchstart="" onclick="read_demo(2)" href="#">デモ2(順次)</a>

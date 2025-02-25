@@ -138,9 +138,10 @@ function create_share_list(){
 			}
 			else if (lines[i].indexOf('turnBacklight') != -1){
 				if(lines[i].indexOf('On') != -1){
-					var para2 = strSplit(lines[i], 1, " ");
+					var para1 = strSplit(lines[i], 1, " ");
+					var para2 = strSplit(lines[i], 2, " ");
 					para2 = para2 / 0.25;					
-					outArray.push( "4,0,100," + para2.toString() + ",0,0,0\n"); 
+					outArray.push( "4,0," + para1 + "," + para2.toString() + ",0,0,0\n"); 
 				}
 				else if(lines[i].indexOf('Conti') != -1){
 					outArray.push( "4,1,0,0,0,0,0\n");
@@ -160,11 +161,8 @@ function create_share_list(){
 					outArray.push( "5,2,0,0,0,0,0\n");
 				}
 				else if(lines[i].indexOf('Sounddata') != -1){
-					//var para1 = strSplit(lines[i], 2, " ");
-					outArray.push( "5,3,1,0,0,0,0\n");
-				}
-				else if(lines[i].indexOf('alarmSound') != -1){
-					outArray.push( "5,4,0,0,0,0,0\n");
+					var para1 = strSplit(lines[i], 2, " ");
+					outArray.push( "5,3,"+ para1 +",0,0,0,0\n");
 				}
 			}
 			else if (lines[i].indexOf('output') != -1){
@@ -237,7 +235,7 @@ function create_share_list(){
 					var para1 = strSplit(lines[i], 2, " ");
 					outArray.push( "7,3,"+ para1 +",0,0,0,0\n");
 				}
-				else if(lines[i].indexOf('Clock') != -1){
+				else if(lines[i].indexOf('clock') != -1){
 					var para1 = strSplit(lines[i], 2, " ");
 					var para2 = strSplit(lines[i], 3, " ");
 					outArray.push( "7,4," + para1 + "," + para2 + ",0,0,0\n");
@@ -760,11 +758,8 @@ function get_block(data){
 		else if (dataArray[1] == "2"){
 			return "<block type=\"sound3\" id=\"2a%]d51C.]OaPY:q|I_]\">";
 		}
-		else if (dataArray[1] == "3"){
-			return "<block type=\"soundplay\" id=\"Tsf#L#ysep:VM=5UbR1X\">";
-		}
 		else {
-			return "<block type=\"alarmplay\" id=\"Tsf#L#ysep:VM=5UbR1X\">";
+			return "<block type=\"soundplay\" id=\"Tsf#L#ysep:VM=5UbR1X\">";
 		}
 	}
 	else if (dataArray[0] == "6") {//タイマー	
@@ -780,8 +775,11 @@ function get_block(data){
 		else if (dataArray[1] == "3"){
 			return "<block type=\"timer_light\" id=\"_}D8G~CSQQ[IkVEezZLo\"><field name=\"timertime\">" + dataArray[2] + "</field><field name=\"timerlight\">" + dataArray[3] + "</field>";
 		}
-		else {
+		else if (dataArray[1] == "4"){
 			return "<block type=\"timer_dark\" id=\"ol|:W~-ydWU}8kvO#g#T\"><field name=\"timertime\">" + dataArray[2] + "</field><field name=\"timerlight\">" + dataArray[3] + "</field>";
+		}
+		else {
+			return "<block type=\"timer_clock\" id=\"J}[?XmICNgy8;LDkhq@|\"><field name=\"timertime\">" + dataArray[2] + "</field><field name=\"sethour\">" + dataArray[3] + "</field><field name=\"setminute\">" + dataArray[4] + "</field>";
 		}
 	}
 	else if (dataArray[0] == "7") {//信号待ち
@@ -798,7 +796,7 @@ function get_block(data){
 			return "<block type=\"wait_dark\" id=\"kI$Fv|mGJ|QI3)9X5a.%\"><field name=\"waitlight\">" + dataArray[2] + "</field>";
 		}
 		else if (dataArray[1] == "4"){
-			return "<block type=\"wait_clock\" id=\"~,j|4OiN=CsENpPq`U%{\"><field name=\"sethour\">" + dataArray[2] + "</field><field name=\"setminute\">" + dataArray[3] + "</field>";
+			return "<block type=\"wait_clock\" id=\"~,j|4OiN=CsENpPq`U%{\"><field name=\"sethour\">" + dataArray[3] + "</field><field name=\"setminute\">" + dataArray[4] + "</field>";
 		}
 		else if (dataArray[1] == "5"){
 			return "<block type=\"wait_signal\" id=\"XIp6]jbohmV;ZcHz6pr;\">";

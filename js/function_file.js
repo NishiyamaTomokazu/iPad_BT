@@ -3,14 +3,13 @@ function autosave(){
 	var xml = Blockly.Xml.workspaceToDom(workspace);
 	var text = Blockly.Xml.domToText(xml);
 	text = text + "\n" + report_txt();
-	localStorage.setItem("ud1_mainpro",  text);
-	console.log("オートセーブ！")
+	localStorage.setItem("sc1_mainpro",  text);
 }
 function autosavefile_read(){
-	var ABC = localStorage.getItem( "ud1_mainpro" ); // なかったらnullが返る
+	var ABC = localStorage.getItem( "sc1_mainpro" ); // なかったらnullが返る
 	if ( ABC ){
 		var readdata =　"";
-		var datast =　window.localStorage["ud1_mainpro"];
+		var datast =　window.localStorage["sc1_mainpro"];
 		if (datast.indexOf("REPORT") != -1){
 			readdata = datast.substring(0, datast.indexOf("REPORT"));
 		}
@@ -47,7 +46,7 @@ function downloadCode() {
 
 	const a = document.createElement('a');
 	a.href = URL.createObjectURL(new Blob([text], {type: 'text/plain'}));
-	a.download = result + ".ud1";
+	a.download = result + ".sc1";
 	a.style.display = 'none';
 	document.body.appendChild(a);
 	a.click();
@@ -74,7 +73,7 @@ function uploadCode(datast) {
 function saveCode() {
 	//プログラムの自動保存
 	autosave();
-	var savedPrefix = 'saved.hisatomi-ud1.blk.';    //ローカルストレージに保存する時のキー
+	var savedPrefix = 'saved.hisatomi-sc1.blk.';    //ローカルストレージに保存する時のキー
 	if ('localStorage' in window) {
         var name = null;
         while (!name) {
@@ -96,7 +95,7 @@ function saveCode() {
 }
 //ストレージへ保存されたファイルの表示処理
 function restoreBlocks() {
-	var savedBlockPrefix = 'saved.hisatomi-ud1.blk.';
+	var savedBlockPrefix = 'saved.hisatomi-sc1.blk.';
 	if ('localStorage' in window) {
 	  var modal = document.getElementById('restoreModal');
 	  var list  = document.getElementById('restoreList');
@@ -123,7 +122,7 @@ function restoreBlocks() {
 }
 //ストレージから読み込み
 function restoreBlocksFrom(name) {
-	var savedBlockPrefix = 'saved.hisatomi-ud1.blk.';
+	var savedBlockPrefix = 'saved.hisatomi-sc1.blk.';
 	var modal = document.getElementById('restoreModal');
 	modal.style.display = 'none';
 	if (!name) { return; } // ignore if empty
@@ -181,8 +180,7 @@ function downloadCode_ipad() {
 
 	const a = document.getElementById("filesave");
 	a.href = URL.createObjectURL(new Blob([text], {type: 'application/octet-stream'}));
-	a.download = result + ".ud1";
-	window.location.reload();
+	a.download = result + ".sc1";
 }
 
 //レポート内容があれば代入
@@ -237,7 +235,7 @@ function set_report(datast){
 
 //ブラウザへ保存したプログラムの削除
 function delete_restoreBlocks(){
-	var savedBlockPrefix = 'saved.hisatomi-ud1.blk.';
+	var savedBlockPrefix = 'saved.hisatomi-sc1.blk.';
 	if ('localStorage' in window) {
 	  var modal = document.getElementById('delete_restoreModal');
 	  var list  = document.getElementById('delete_restoreList');
@@ -264,7 +262,7 @@ function delete_restoreBlocks(){
 }
 //ストレージから削除
 function delete_restoreBlocksFrom(name) {
-	var savedBlockPrefix = 'saved.hisatomi-ud1.blk.';
+	var savedBlockPrefix = 'saved.hisatomi-sc1.blk.';
 	var modal = document.getElementById('delete_restoreModal');
 	modal.style.display = 'none';
 	if (!name) { return; } // ignore if empty
@@ -274,15 +272,5 @@ function delete_restoreBlocksFrom(name) {
 		
 	} else {
 		window.alert('Error: ' + name + ' がありません');
-	}
-}
-function delete_cancelRestoreBlocks() {
-	var modal = document.getElementById('delete_restoreModal');
-	modal.style.display = 'none';
-}
-function pressCancelRestoreBlocks(event) {
-	var modal = document.getElementById('delete_restoreModal');
-	if (event.target == modal) {
-		delete_cancelRestoreBlocks();
 	}
 }

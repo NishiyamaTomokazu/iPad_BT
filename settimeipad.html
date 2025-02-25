@@ -13,10 +13,16 @@
 		window.onload = function onLoad() {
 		  var target = document.getElementById("DateTimeDisp");
 
+		  var Year = now.getFullYear();
+		  var Month = now.getMonth()+1;
+		  var Date = now.getDate();
 		  var Hour = now.getHours();
 		  var Min = now.getMinutes();
 		  var Sec = now.getSeconds();
 			
+		  document.getElementById("jikoku_nen").value = Year.toString().substr(2,2);
+		  document.getElementById("jikoku_gatu").value = Month;
+		  document.getElementById("jikoku_niti").value = Date;
 		  document.getElementById("jikoku_ji").value = Hour;
 		  document.getElementById("jikoku_hun").value = Min;
 		  document.getElementById("alerm_ji").value = 12;
@@ -41,7 +47,30 @@
 		<div class="font20">時刻設定(iPad)</div><br><br>
 	</div>
 	<div class="row justify-content-center heightcenter">
-	  <select name="select" id="jikoku_ji" class="select">
+	  <select name="select" id="jikoku_nen" class="select">
+	    <option value="21">2021</option>
+	    <option value="22">2022</option>
+	    <option value="23">2023</option>
+	    <option value="24">2024</option>
+	    <option value="25">2025</option>
+	  </select>
+		<p class="vertical-middle"><label class="label">年</label></p>
+	  <select name="select" id="jikoku_gatu" class="select">
+	    <option value="1">1</option>
+	    <option value="2">2</option>
+	    <option value="3">3</option>
+	    <option value="4">4</option>
+	    <option value="5">5</option>
+	    <option value="6">6</option>
+	    <option value="7">7</option>
+	    <option value="8">8</option>
+	    <option value="9">9</option>
+	    <option value="10">10</option>
+	    <option value="11">11</option>
+	    <option value="12">12</option>
+	  </select>
+		<p class="vertical-middle"><label class="label">月</label></p>
+	  <select name="select" id="jikoku_niti" class="select">
 	    <option value="0">0</option>
 	    <option value="1">1</option>
 	    <option value="2">2</option>
@@ -66,6 +95,41 @@
 	    <option value="21">21</option>
 	    <option value="22">22</option>
 	    <option value="23">23</option>
+	    <option value="24">24</option>
+	    <option value="25">25</option>
+	    <option value="26">26</option>
+	    <option value="27">27</option>
+	    <option value="28">28</option>
+	    <option value="29">29</option>
+	    <option value="30">30</option>
+	    <option value="31">31</option>
+	  </select>
+		<p class="vertical-middle"><label class="label">日</label></p>
+	  <select name="select" id="jikoku_ji" class="select">
+	    <option value="1">1</option>
+	    <option value="2">2</option>
+	    <option value="3">3</option>
+	    <option value="4">4</option>
+	    <option value="5">5</option>
+	    <option value="6">6</option>
+	    <option value="7">7</option>
+	    <option value="8">8</option>
+	    <option value="9">9</option>
+	    <option value="10">10</option>
+	    <option value="11">11</option>
+	    <option value="12">12</option>
+	    <option value="13">13</option>
+	    <option value="14">14</option>
+	    <option value="15">15</option>
+	    <option value="16">16</option>
+	    <option value="17">17</option>
+	    <option value="18">18</option>
+	    <option value="19">19</option>
+	    <option value="20">20</option>
+	    <option value="21">21</option>
+	    <option value="22">22</option>
+	    <option value="23">23</option>
+	    <option value="24">24</option>
 	  </select>
 		<p class="vertical-middle"><label class="label">時</label></p>
 	  <select name="select" id="jikoku_hun" class="select">

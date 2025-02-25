@@ -199,11 +199,10 @@ Blockly.JavaScript['led_conti_off'] = function(block) {
 };
 
 Blockly.JavaScript['backlight_time'] = function(block) {
-  //var para1 = block.getFieldValue('backlightlight');
-  //var para2 = block.getFieldValue('backlighttime');
-  //var code = 'turnBacklightOn:for:( ' + para1 + ' ' + para2 + ' )\n';
+  var para1 = block.getFieldValue('backlightlight');
   var para2 = block.getFieldValue('backlighttime');
-  var code = 'turnBacklightOn:for:( ' + para2 + ' )\n';
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'turnBacklightOn:for:( ' + para1 + ' ' + para2 + ' )\n';
   return code;
 };
 Blockly.JavaScript['backlight_conti'] = function(block) {
@@ -247,6 +246,14 @@ Blockly.JavaScript['timer_dark'] = function(block) {
   var number_timerlight = block.getFieldValue('timerlight');
   // TODO: Assemble JavaScript into code variable.
   var code = 'turnTimerDarkFor:for: ( ' + number_timertime + ' ' + number_timerlight + ' )\n';
+  return code;
+};
+Blockly.JavaScript['timer_clock'] = function(block) {
+  var number_timertime = block.getFieldValue('timertime');
+  var number_hour = block.getFieldValue('sethour');
+  var number_minute = block.getFieldValue('setminute');
+  // TODO: Assemble JavaScript into code variable.
+  var code = 'turnTimerClockFor ( ' + number_timertime + ' ' + number_hour + ' ' + number_minute + ' )\n';
   return code;
 };
 
@@ -308,16 +315,9 @@ Blockly.JavaScript['sound3'] = function(block) {
 Blockly.JavaScript['soundplay'] = function(block) {
   var sound_number = block.getFieldValue('sundno');
   // TODO: Assemble JavaScript into code variable.
-  var code = 'playSounddata ( )\n';
+  var code = 'playSounddata ( ' + sound_number + ' )\n';
   return code;
 };
-Blockly.JavaScript['alarmplay'] = function(block) {
-  var sound_number = block.getFieldValue('sundno');
-  // TODO: Assemble JavaScript into code variable.
-  var code = 'playalarmSound ( )\n';
-  return code;
-};
-
 Blockly.JavaScript['if_yes'] = function(block) {
   var value_if_jeken = Blockly.JavaScript.valueToCode(block, 'if_jeken', Blockly.JavaScript.ORDER_ATOMIC);
   var statements_yes = Blockly.JavaScript.statementToCode(block, 'yes');

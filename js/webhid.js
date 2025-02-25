@@ -62,18 +62,72 @@ function handleinputReport_1(e) {
 }
 
 //ミリ秒停止する
-const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const wait = async (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
+//現在版
+//async function transferHID(outData){
+function transferHID(outData){	
+	let data = new Array();
+	let i;
+	console.log("開始！");	//確認用
+	for(i=0; i<outData.length; i++){
+		outputReport[0] = outData[i];
+		hidDevice.sendReport(outputReportId, outputReport);
+		
+		console.log(i + "回目" + outputReport[0]);	//確認用
+		//wait(100);	//少し長めウェイト
+		sleep(30);
+	}
+	console.log("終了！");	//確認用
+}
+
+//修正版
+/********************
+ * コンソールにエラーとして
+ * Uncaught (in promise) DOMException: Failed to write the report.
+ * と、出力される
+ * hidDevice.sendReport関数の処理がうまく行っていない？
+ * 
+ ********************/
+//async function transferHID(outData){
+/* 	for(let outputReport of outData){
+		//console.log(outputReport);
+		const promise = hidDevice.sendReport(outputReportId, outputReport);//hidDevice.sendReport(outputReportId, outputReport);
+		const data = await promise;
+		console.log(outputReport);
+		wait(30);
+	} */
+	// for(var i=0; i<outData.length; i++){
+	// 	outputReport[0] = outData[i];
+	// 	let mypromise = new Promise((resolve, reject) => {
+	// 		hidDevice.sendReport(outputReportId, outputReport);
+	// 	});
+	// 	mypromise.then((result) => {
+	// 		console.log(i + "回目" + outputReport[0]);	//確認用
+	// 		wait(70);
+	// 	}).catch((error) => {
+	// 		console.log(i + "回目" + outputReport[0]);	//確認用
+	// 	});
+	// 	//let data = await promise;
+		
+	// }
+//}
+//修正版 ちょっと失敗
+/*
 async function transferHID(outData){
 	let data = new Array();
 	for(var i=0; i<outData.length; i++){
 		outputReport[0] = outData[i];
-		hidDevice.sendReport(outputReportId, outputReport);
-		//console.log(i + "回目" + outputReport[0]);	//確認用
-		//await wait(70);	//少し長めウェイト
-		await wait(90);	//少し長めウェイト
+		var sendPromise = hidDevice.sendReport(outputReportId, outputReport);
+		if(sendPromise !== undefined) {
+			sendPromise.then(_ => {
+				console.log(i + "回目" + outputReport[0]);
+				wait(200);
+			});
+		}
 	}
-}
+}*/
+
 //時計合わせ用の接続
 async function connectHIDtime() {
 	// chrome://flags/#enable-experimental-web-platform-features これを有効にする
@@ -88,7 +142,8 @@ async function connectHIDtime() {
 		//1秒後にstartCdS実行
 	   delayedCall(1200,function(){
 		   //新型なら252を送って緑のLEDを点灯させる
-		   if (hidDevice.productName.indexOf('UD-1') != -1){			   
+		   if (hidDevice.productName.indexOf('UC-7/8 Ver3') != -1 || hidDevice.productName.indexOf('UC-9/10 Ver3') != -1 || 		
+			   hidDevice.productName.indexOf('UD-1_ver1_2023') != -1){			   
 			   //接続できたら252を送る
 			   let runData = new Array();
 			   runData[0] = 0xFC;	//252
@@ -103,7 +158,6 @@ async function connectHIDtime() {
 async function connectHID() {
 	// chrome://flags/#enable-experimental-web-platform-features これを有効にする
 	let hidDevices = await navigator.hid.requestDevice({ filters: [{vendorId: 0x21CF, productId: 0x0002}] });
-	if (hidDevices === null || hidDevices.length == 0) return;
 
 	hidDevice = hidDevices[0];
 
@@ -113,7 +167,7 @@ async function connectHID() {
 		//1秒後にstartCdS実行
 	   delayedCall(1200,function(){
 		   //新型なら252を送って緑のLEDを点灯させる
-		   if (hidDevice.productName.indexOf('UD-1') != -1){			   
+		   if (hidDevice.productName.indexOf('UD-1_ver1_2023') != -1){			   
 			   //接続できたら252を送る
 			   let runData = new Array();
 			   runData[0] = 0xFC;	//252
@@ -134,7 +188,7 @@ function delayedCall(second, callBack){
 //デバイスが接続されているか
 function usb_info_HID(){
 	try{
-		if(hidDevice.productName.indexOf('UD-1') != -1){ 
+		if(hidDevice.productName.indexOf('UD-1_ver1_2023') != -1){ 
 			return true;
 		}
 		else{
@@ -149,7 +203,9 @@ function usb_info_HID(){
 //デバイスが接続されているか
 function usb_info_HID_all(){
 	try{
-		if(hidDevice.productName.indexOf('UD-1') != -1){ 
+		if(hidDevice.productName.indexOf('UC-7/8 Ver3') != -1 || hidDevice.productName.indexOf('UC-51') != -1 ||
+		   hidDevice.productName.indexOf('UC-9/10 Ver3') != -1 || hidDevice.productName.indexOf('UC-9') != -1 ||
+		   hidDevice.productName.indexOf('UD-1_ver1_2023') != -1){ 
 			return true;
 		}
 		else{
@@ -187,31 +243,33 @@ function handleinputReport(e) {
 		arraypushbool = true;
 		usbinputdata.push(byte_one);
 		usbinputdata.push(byte_two);
+		console.log(byte_one);
+		console.log(byte_two);
 	}
 	else{
 		if (arraypushbool == true){
 			usbinputdata.push(byte_one);
 			usbinputdata.push(byte_two);
-			if (byte_two == "240" || byte_two == "241"){
-				if (byte_two == "240"){
+			if (byte_one == "240" || byte_one == "241"){
+				if (byte_one == "240"){
 					document.querySelector("#gaibuData").innerHTML = "OFF";
 				}
 				else{
 					document.querySelector("#gaibuData").innerHTML = "ON";
-				}
+				}		
 			}
 			//console.log(usbinputdata);
-			if (usbinputdata.length >= 6){	
+			if (usbinputdata.length >= 14){	
 				//0 1 温度 2 明るさ 3　の配列				
-				//let ondo16 = cov16(usbinputdata[5]) + cov16(usbinputdata[4]);
+				let ondo16 = cov16(usbinputdata[5]) + cov16(usbinputdata[4]);
 				//let ondo16 = Number(usbinputdata[5]).toString(16) + Number(usbinputdata[4]).toString(16);
-				//let ondo = (parseInt(ondo16,16)/100).toFixed(1);
-				//document.querySelector("#ondoData").innerHTML = ondo;
-				if (usbinputdata[3] == "100"){					
-					document.querySelector("#cdSData").innerHTML = usbinputdata[3];
+				let ondo = (parseInt(ondo16,16)/100).toFixed(1);
+				document.querySelector("#ondoData").innerHTML = ondo;
+				if (usbinputdata[8] == "100"){					
+					document.querySelector("#cdSData").innerHTML = usbinputdata[8];
 				}
 				else{
-					document.querySelector("#cdSData").innerHTML = " " + usbinputdata[3];
+					document.querySelector("#cdSData").innerHTML = " " + usbinputdata[8];
 				}
 				usbinputdata.length = 0;
 				arraypushbool = false;

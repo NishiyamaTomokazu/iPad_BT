@@ -93,6 +93,66 @@ function get_colordata(color){
     else if  (color == "White"){return "255 255 255 ";}
     else if  (color == "Off"){return "0 0 0 ";}
 }
+//LED点灯用
+function Change_4Byte(RGB_T_Para){   
+    var All_C_data = "0";
+    for ( var i = 0; i < 3; i++ ) {
+        var C_par = Color_Data(strSplit(RGB_T_Para, i, " "));        
+        var Binary = C_par.toString(2);          
+        var cnt = "";
+        for ( var j = 0; j < 6 - Binary.length; j++ ) {
+            cnt += "0";
+        }        
+        Binary = cnt + Binary;
+        All_C_data = All_C_data + Binary;
+    }
+    var Binarytime = strSplit(RGB_T_Para, 3, " ");
+    Binarytime = Number(Binarytime).toString(2);
+    var cnt = "";
+    for ( var j = 0; j < 7 - Binarytime.length; j++ ) {
+        cnt += "0"
+    }   
+    Binarytime =  cnt+ Binarytime;
+    All_C_data = All_C_data + Binarytime;
+    All_C_data += "000000";
+    
+    return All_C_data;
+}
+//フェードインアウト用
+function Change_3Byte(RGB_T_Para){   
+    var All_C_data = "0";
+    for ( var i = 0; i < 3; i++ ) {
+        var C_par = Color_Data(strSplit(RGB_T_Para, i, " "));        
+        var Binary = C_par.toString(2);          
+        var cnt = "";
+        for ( var j = 0; j < 6 - Binary.length; j++ ) {
+            cnt += "0";
+        }        
+        Binary = cnt + Binary;
+        All_C_data = All_C_data + Binary;
+    }
+    var Binarytime = strSplit(RGB_T_Para, 3, " ");
+    Binarytime = Number(Binarytime).toString(2);
+    var cnt = "";
+    for ( var j = 0; j < 5 - Binarytime.length; j++ ) {
+        cnt += "0"
+    }   
+    Binarytime =  cnt+ Binarytime;
+    All_C_data = All_C_data + Binarytime;
+    
+    return All_C_data;
+}
+//0～255を0～100に変換
+function Color_Data(No){
+    var xy = (No * 100 / 255) / 12;
+    var vis= Math.ceil(Math.pow(xy, 2)) ;
+    if ( vis > 63 ) {
+        return 63;
+    }
+    else{
+        return vis;
+    }
+}
 //文字列を分解（str：文字列 , no：何番目を取得するか）
 function strSplit(str, no, kugiri){
     var strArray = str.split(kugiri);
@@ -123,7 +183,7 @@ function disp_memory(){//文字プログラムに変換
 	//改行コードを\nに統一
 	var text  = document.getElementById('sendText').value.replace(/\r\n|\r/g, "\n");
 	var lines = text.split( '\n' );
-	alert("消費メモリ数は" + (lines.length - 2).toString() + "/120 です");
+	alert("消費メモリ数は" + (lines.length - 3).toString() + "/120 です");
 }
 // ビジーwaitを使う方法
 function sleep(waitMsec) {
