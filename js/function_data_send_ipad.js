@@ -1,7 +1,7 @@
 //転送処理(iPad)
 function sendHID_iPad() {    
     setupEventListeners();
-    resumeAudioContext();
+    //resumeAudioContext();
 	try{
 	//プログラムの自動保存
 	autosave();
