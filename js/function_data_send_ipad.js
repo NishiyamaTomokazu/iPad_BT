@@ -1,6 +1,7 @@
 //転送処理(iPad)
 function sendHID_iPad() {    
-    setupEventListeners()
+    setupEventListeners();
+    resumeAudioContext();
 	try{
 	//プログラムの自動保存
 	autosave();
@@ -104,6 +105,18 @@ function initAudioSystem() {
         console.error("オーディオシステムの初期化に失敗:", error);
         updateStatus("オーディオシステムの初期化に失敗しました");
         return false;
+    }
+}
+
+function resumeAudioContext() {
+    if (audioContext && audioContext.state !== 'running') {
+        audioContext.resume().then(() => {
+            console.log("オーディオコンテキストが再開されました");
+            audioInitialized = true;
+            updateStatus("音が有効になりました");
+        }).catch(error => {
+            console.error("オーディオコンテキストの再開に失敗:", error);
+        });
     }
 }
 
